@@ -1,4 +1,4 @@
-Tara Wright, 
+Tara Wright, Sean Lyons, Lauren Caldwell 
 
 print("Hello World")
 
