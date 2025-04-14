@@ -10,8 +10,9 @@ You can find the data for this webpage at the following link:
 https://www.kaggle.com/datasets/noaa/seismic-waves?select=sources.csv
 
 User Story 1:
+A real estate investement group is interested in seeing the history of the real-estate destruction from tsunami or earthquake in Bangkok, Thailand so that they can decide whether it is smart to invest money in real estate in that area.
 
-Implementation 1:
+Implementation 1: One way to implement this would be to have a world map from where you can choose on the country and the specific area that you are interesred in. From which the user can select the date frame of the area they are interested in and see the statistics such as: amount of occurances of tsunamis, amount of houses destroyed and their estimated damage value.
 
 User Story 2:
 
