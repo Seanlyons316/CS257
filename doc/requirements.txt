@@ -1,0 +1,23 @@
+Reuirements Document for Web App and Wireframes:
+
+Names: Sean Lyons and Matvei Keshkekian
+
+Description of Data: 
+This dataset covers comprehensive data of all tsunami and waves since 2000BC, 
+covering its cause, magnitude, intensity, location, and observed impacts, 
+like fatalities, economic damages, as well as other things. 
+This dataset would be valuable for researchers, engineers, 
+and tsunami warning centers. Like the amount of information provided for 
+consequences of each tsunami, but not sure if there is enough.
+
+You can find the data for this webpage at the following link:
+https://www.kaggle.com/datasets/noaa/seismic-waves?select=sources.csv
+
+User Story 1:
+
+Implementation 1:
+
+User Story 2:
+
+Implementation 2:
+
