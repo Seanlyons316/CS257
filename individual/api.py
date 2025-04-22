@@ -33,23 +33,23 @@ def get_help():
     return flask.render_template('help.html')
 
 
-@app.route('/tsunami_count/<year>')
+@app.route('/tsunami_count/<years>')
 def get_tsunami_count(years):
     counts = []
     with open('../data/tsunamis.csv', 'r') as file:
         reader = csv.reader(file)
         next(reader)  # Skip header row
+        data = list(reader)
         for year in years.split(','):
             count = 0
-            year = year.strip()
             year = int(year)
-            for row in reader:
+            for row in data:
                 try:
                     if int(row[1]) == year:
                         count += 1
                 except (ValueError, IndexError):
                     continue
-            counts.append({'year': year, 'count': count})
+            counts.append({'Year': year, 'Number of Tsunamis': count})
     return json.dumps(counts, indent = 4)
                 
     
