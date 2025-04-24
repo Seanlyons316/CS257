@@ -1,0 +1,23 @@
+Requirements Document for Web App and Wireframes:
+
+Names: Sean Lyons and Matvei Keshkekian
+
+Description of Data: This dataset covers comprehensive data of all tsunamis and waves since 2000 BC, covering their cause, magnitude, 
+intensity, location, and observed impacts, like fatalities, economic damages, and other things. This dataset would be valuable 
+for researchers, engineers, and tsunami warning centers. Like the amount of information provided for consequences of each tsunami.
+
+You can find the data for this webpage at the following link:
+https://www.kaggle.com/datasets/noaa/seismic-waves?select=sources.csv
+
+User Story 1:
+A real estate investment group is interested in the history of real estate destruction from a tsunami or earthquake in Bangkok, Thailand, so that they can decide whether it is smart to invest money in that area.
+
+Implementation 1: 
+One way to implement this would be to have a world map from which you can choose the country and the specific area that you are interested in. The user can then select the date frame of the area they are interested in and see statistics such as the number of tsunamis, the number of houses destroyed, and their estimated damage value.
+
+User Story 2: 
+A team of students and professors from the geology department at Carleton College is conducting an independent study on the impact of Tsunamis on the presence of trilobyte fossils worldwide. To this end, they want to get a list of Tsunamis that occurred since 2000 BC so they can compare it against their data on the distribution of trilobyte fossils. They want to confirm their hypothesis that significant wave events kicked up the ocean floor, exposed these fossils, and pushed them to land.
+
+Implementation 2:
+The team accesses our web app, searches for Tsunamis of a particular minimum strength, catalogues their distribution worldwide, and compares this against their trilobyte distribution data. From here, they can calculate the coherence of these two distributions to see if they are indeed related to each other and, if so, how.
+
