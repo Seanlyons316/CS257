@@ -4,26 +4,29 @@ All responses are in JSON
 
 A brief list of some of the endpoints we wish to implement.
 
-REQUEST: /tsunamis/country/{country_name}/
-RESPONSE:
-   A list of all of the recorded tsunamis and their info that have occurred in the territory of the specified country.
-
-REQUEST: /tsunami/id/{id}/
+REQUEST: /tsunami/id/{id}
 RESPONSE: 
     A table of all the information about the tsunami with that specified ID. This information includes date, time, magnitude, damage, etc.
-
-REQUEST: /tsunami/{country_name}/years[?before={YEAR}&amp;after={YEAR}]
-RESPONSE:
-    A list of all of the recorded tsunamis that have occurred in the specified country.
-    If before={YEAR} is specified, only tsunamis that occurred before that year are returned.
-    If after={YEAR} is specified, only tsunamis that occurred after that year are returned.
   
-REQUEST: /tsunamis/damage
+REQUEST: /tsunamis
+GET PARAMETER: return a list of tsunamis with known attributes like damage, deaths, cost of damages, etc.. default = '' and do not return tsunamis where this parameter is not known.
 RESPONSE:
-    A recorded amount of millions of dollars of damage caused from the tsunamis in all the countries.
+   A list of the tsunamis that have known information about the specified attributes.
 
-REQUEST: /tsunami/years[?before={YEAR}&amp;after={YEAR}]
+All of the ones below will be merged into the one above.
+
+REQUEST: /tsunamis/years[?before={YEAR}&amp;after={YEAR}]
 RESPONSE:
     A list of all of the countries that have had recorded tsunamis either before or after the specified year.
 
+REQUEST: /tsunamis/country/{country_name}
+RESPONSE:
+   A list of all of the recorded tsunamis and their info that have occurred in the territory of the specified country.
+
+REQUEST: /tsunamis/{country_name}/years[?before={YEAR}&amp;after={YEAR}]
+RESPONSE:
+    A list of all of the recorded tsunamis that have occurred in the specified country.
+    If before={YEAR} is specified, only tsunamis that occurred before that year are returned.
+    If after={YEAR} is specified, only tsunamis that occurred after that year are returned.  
+    If the country name null then returns all of the tsunamis for all of the countries and years
     
