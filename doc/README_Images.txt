@@ -1,9 +1,0 @@
-The following is a readme file for the mockup images for our website. There are four images in total.
-
-Image #1: This page is a simple homepage where the user can select one of three different menus. The first of these is the map mode. This button has a picture of the map. The second is the plain list mode. This has just a sample image of the list as background. The final is an information and help page that tells the user a bit about the project and what exactly tsunamis are.
-
-Image #2: This page is the list mode for searching for tsunamis. The user can sort the list by various criteria including but not limited to country, continent, magnitude, and more. From here, a list of tsunamis that can be selected for more info is presented as a name and year of occurrence. The sorting criteria are sorted into three distinct bins to guide the user through their search. After selecting a particular tsunami they are brought to image/page #3.
-
-Image #3: This page is a sample of what the user will be presented with if they select a specific tsunami from page #3. It lists all of the data about the tsunami made available by our data set. Additionally, if the tsunami is historically significant, a brief blurb about it and a link to relevant material about it may be provided on the summary page.
-
-Image #4: This page is presented to the user if they select map mode from the homepage. From here, they can click anywhere on the map to see the tsunamis (if any at all) that occurred within a specified radius around their selected point on the map. The latitude and longitude of this position will be displayed in the search settings box on the left-hand side of the page. The search settings box also allows them to narrow their search by a particular stretch of years and modify the search radius. After they select a particular point, they will be taken back to page #2 with a narrowed selection of the tsunamis in that area.
