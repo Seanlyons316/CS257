@@ -11,9 +11,9 @@ RESPONSE:
 REQUEST: /tsunamis
 GET PARAMETER: return a list of tsunamis with known attributes like damage, deaths, cost of damages, etc.. default = '' and do not return tsunamis where this parameter is not known.
 RESPONSE:
-   A list of the tsunamis that have known information about the specified attributes.
+   A list of the tsunamis for which there is known information about the specified attributes.
 
-All of the ones below will be merged into the one above.
+All of the ones below will be merged into the GET parameter above.
 
 REQUEST: /tsunamis/years[?before={YEAR}&amp;after={YEAR}]
 RESPONSE:
