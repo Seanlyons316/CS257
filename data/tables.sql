@@ -1,6 +1,6 @@
-CREATE TABLE tsunami_attribute (
+CREATE TABLE tsunamis_attribute (
    SOURCE_ID real NOT NULL,
-   WAVE_ID real NOT NULL,,
+   WAVE_ID real NOT NULL,
    DISTANCE_FROM_SOURCE real NOT NULL,
    TRAVEL_TIME_HOURS real,
    TRAVEL_TIME_MINUTES real,
@@ -9,9 +9,9 @@ CREATE TABLE tsunami_attribute (
    wave_PERIOD real,
    FIRST_MOTION real,
    MAXIMUM_HEIGHT real,
-   HORIZONRTAL_INNUNDATION real,
+   HORIZONRTAL_INNUNDATION real
 );
-CREATE TABLE tsunami_destruction (
+CREATE TABLE tsunamis_destruction (
    WAVE_ID real NOT NULL,
    INJURIES real,
    INJURY_ESTIMATE real,
@@ -22,25 +22,25 @@ CREATE TABLE tsunami_destruction (
    HOUSES_DAMAGED real,
    HOUSE_DAMAGE_ESTIMATE real,
    HOUSES_DESTROYED real,
-   HOUSE_DESTRUCTION_ESTIMATE real,
+   HOUSE_DESTRUCTION_ESTIMATE real
 );
 
-CREATE TABLE tsunami_place_time (
+CREATE TABLE tsunamis_place_time (
    WAVE_ID real NOT NULL,
+   REGION_CODE real,
+   COUNTRY text,
    wave_YEAR real NOT NULL,
    wave_MONTH text,
    wave_DAY real,
-   REGION_CODE real,
-   COUNTRY text,
-   wave_STATE/PROVINCE text,
+   wave_STATE text,
    wave_LOCATION text,
-   LATITUDE real NOT NULL,
-   LONGITUDE real NOT NULL,
+   LATITUDE real,
+   LONGITUDE real
 );
 
-CREATE TABLE tsunami_ids (
+CREATE TABLE tsunamis_ids (
    SOURCE_ID real NOT NULL,
-   WAVE_ID real NOT NULL,
+   WAVE_ID real NOT NULL
 );
 
 -- CREATE TABLE sources (
