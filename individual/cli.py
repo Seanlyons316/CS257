@@ -25,7 +25,7 @@ def get_parsed_arguments():
 def get_tsunami_count(year):
     ''' Returns the number of tsunamis in a given year. '''
     count = 0
-    with open('../data/tsunamis.csv', 'r') as file:
+    with open('../data/sources.csv', 'r') as file:
         reader = csv.reader(file)
         next(reader)  # Skip header row
         for row in reader:

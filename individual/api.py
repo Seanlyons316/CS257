@@ -36,7 +36,7 @@ def get_help():
 @app.route('/tsunami_count/<years>')
 def get_tsunami_count(years):
     counts = []
-    with open('../data/tsunamis.csv', 'r') as file:
+    with open('../data/sources.csv', 'r') as file:
         reader = csv.reader(file)
         next(reader)  # Skip header row
         data = list(reader)
