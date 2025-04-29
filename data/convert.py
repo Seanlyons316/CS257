@@ -103,7 +103,7 @@ def main():
             tsunamis_ids.append((source_id, wave_id))
 
     # Write to the table files
-    with open('tsunamis_destruction.csv', 'w') as f:
+    with open('tsunamis_destruction.csv', 'w', newline = '') as f:
         writer = csv.writer(f)
         for tsunami_destruction_key in tsunamis_destruction:
             tsunami_destruction = tsunamis_destruction[tsunami_destruction_key]
@@ -115,7 +115,7 @@ def main():
                    tsunami_destruction['house_destruction_estimated'])
             writer.writerow(row)
 
-    with open('tsunamis_attribute.csv', 'w') as f:
+    with open('tsunamis_attribute.csv', 'w', newline = '') as f:
         writer = csv.writer(f)
         for tsunami_attribute_key in tsunamis_attribute:
             tsunami = tsunamis_attribute[tsunami_attribute_key]
@@ -125,15 +125,16 @@ def main():
                    tsunami['maximum height'], tsunami['horizontal inundation'])
             writer.writerow(row)
 
-    with open('tsunamis_place_time.csv', 'w') as f:
+    with open('tsunamis_place_time.csv', 'w', newline = '') as f:
         writer = csv.writer(f)
         for tsunami_place_time_key in tsunamis_place_time:
             tsunami = tsunamis_place_time[tsunami_place_time_key]
             row = (tsunami['id'], tsunami['region_code'], tsunami['country'],
-                   tsunami['state'], tsunami['location'], tsunami['latitude'], tsunami['longitude'])
+                    tsunami['year'], tsunami['month'], tsunami['day'],
+                    tsunami['state'], tsunami['location'], tsunami['latitude'], tsunami['longitude'])
             writer.writerow(row)
 
-    with open('tsunamis_ids.csv', 'w') as f:
+    with open('tsunamis_ids.csv', 'w', newline = '') as f:
         writer = csv.writer(f)
         for wave_id, source_id in tsunamis_ids:
             writer.writerow((source_id, wave_id))
