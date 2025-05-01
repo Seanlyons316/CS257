@@ -21,7 +21,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: tsunamis_attribute; Type: TABLE; Schema: public; Owner: lyonss
+-- Name: tsunamis_attribute; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.tsunamis_attribute (
@@ -39,10 +39,8 @@ CREATE TABLE public.tsunamis_attribute (
 );
 
 
-ALTER TABLE public.tsunamis_attribute OWNER TO lyonss;
-
 --
--- Name: tsunamis_destruction; Type: TABLE; Schema: public; Owner: lyonss
+-- Name: tsunamis_destruction; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.tsunamis_destruction (
@@ -60,10 +58,8 @@ CREATE TABLE public.tsunamis_destruction (
 );
 
 
-ALTER TABLE public.tsunamis_destruction OWNER TO lyonss;
-
 --
--- Name: tsunamis_ids; Type: TABLE; Schema: public; Owner: lyonss
+-- Name: tsunamis_ids; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.tsunamis_ids (
@@ -72,10 +68,8 @@ CREATE TABLE public.tsunamis_ids (
 );
 
 
-ALTER TABLE public.tsunamis_ids OWNER TO lyonss;
-
 --
--- Name: tsunamis_place_time; Type: TABLE; Schema: public; Owner: lyonss
+-- Name: tsunamis_place_time; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.tsunamis_place_time (
@@ -92,10 +86,8 @@ CREATE TABLE public.tsunamis_place_time (
 );
 
 
-ALTER TABLE public.tsunamis_place_time OWNER TO lyonss;
-
 --
--- Data for Name: tsunamis_attribute; Type: TABLE DATA; Schema: public; Owner: lyonss
+-- Data for Name: tsunamis_attribute; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.tsunamis_attribute (source_id, wave_id, distance_from_source, travel_time_hours, travel_time_minutes, validity, measurement_type, wave_period, first_motion, maximum_height, horizonrtal_innundation) FROM stdin;
@@ -26306,7 +26298,7 @@ COPY public.tsunamis_attribute (source_id, wave_id, distance_from_source, travel
 
 
 --
--- Data for Name: tsunamis_destruction; Type: TABLE DATA; Schema: public; Owner: lyonss
+-- Data for Name: tsunamis_destruction; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.tsunamis_destruction (wave_id, injuries, injury_estimate, fatalities, fatality_estimate, damage_millions_dollars, damage_estimate, houses_damaged, house_damage_estimate, houses_destroyed, house_destruction_estimate) FROM stdin;
@@ -52517,7 +52509,7 @@ COPY public.tsunamis_destruction (wave_id, injuries, injury_estimate, fatalities
 
 
 --
--- Data for Name: tsunamis_ids; Type: TABLE DATA; Schema: public; Owner: lyonss
+-- Data for Name: tsunamis_ids; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.tsunamis_ids (source_id, wave_id) FROM stdin;
@@ -78728,7 +78720,7 @@ COPY public.tsunamis_ids (source_id, wave_id) FROM stdin;
 
 
 --
--- Data for Name: tsunamis_place_time; Type: TABLE DATA; Schema: public; Owner: lyonss
+-- Data for Name: tsunamis_place_time; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.tsunamis_place_time (wave_id, region_code, country, wave_year, wave_month, wave_day, wave_state, wave_location, latitude, longitude) FROM stdin;
