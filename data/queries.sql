@@ -15,4 +15,4 @@ SELECT tsunami_place_time.wave_YEAR, tsunami_place_time.COUNTRY, tsunami_place_t
 FROM tsunami_place_time
 WHERE tsunami_place_time.COUNTRY = 'JAPAN'
 ORDER BY tsunami_place_time.wave_YEAR;
-
+ 
