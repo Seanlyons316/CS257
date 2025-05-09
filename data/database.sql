@@ -16,6 +16,10 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+DROP TABLE public.tsunamis_place_time;
+DROP TABLE public.tsunamis_ids;
+DROP TABLE public.tsunamis_destruction;
+DROP TABLE public.tsunamis_attribute;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
