@@ -14,12 +14,33 @@ RESPONSE:
 REQUEST: /help
 RESPONSE:
     This message
+    A brief list of some of the endpoints we wish to implement.
 
-REQUEST: /tsunami/{years}
+REQUEST: /tsunami/id/{id}
+RESPONSE: 
+    A table of all the information about the tsunami with that specified ID. This information includes date, time, magnitude, damage, etc.
+    
+REQUEST: /tsunamis
+GET PARAMETER: return a list of tsunamis with known attributes like damage, deaths, cost of damages, etc.. default = '' and do not return tsunamis where this parameter is not known.
 RESPONSE:
-    A list of the number of tsunamis that happened for that year. You can input the years
-    with commas between them. For example, /tsunami/2000,2001,2002 will return the number of tsunamis
-    for those years.
+    A list of the tsunamis for which there is known information about the specified attributes.
+
+All of the ones below will be merged into the GET parameter above.
+
+REQUEST: /tsunamis/years[?before={YEAR}&amp;after={YEAR}]
+RESPONSE:
+    A list of all of the countries that have had recorded tsunamis either before or after the specified year.
+
+REQUEST: /tsunamis/country/{country_name}
+RESPONSE:
+    A list of all of the recorded tsunamis and their info that have occurred in the territory of the specified country.
+
+REQUEST: /tsunamis/{country_name}/years[?before={YEAR}&amp;after={YEAR}]
+RESPONSE:
+    A list of all of the recorded tsunamis that have occurred in the specified country.
+    If before={YEAR} is specified, only tsunamis that occurred before that year are returned.
+    If after={YEAR} is specified, only tsunamis that occurred after that year are returned.  
+    If the country name null then returns all of the tsunamis for all of the countries and years
     
 
     </pre>

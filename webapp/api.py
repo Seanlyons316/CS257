@@ -51,12 +51,8 @@ def get_tsunamis():
     ''' Returns a list of all the tsunamis and all of their info". '''
     tsunamis = []
     try:
-        # Create a "cursor", which is an object with which you can iterate
-        # over query results.
         connection = get_connection()
         cursor = connection.cursor()
-
-        # Execute the query
         query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
         WHERE tsunamis_attribute.WAVE_ID = tsunamis_destruction.WAVE_ID 
         AND tsunamis_destruction.WAVE_ID = tsunamis_place_time.WAVE_ID 
@@ -64,7 +60,6 @@ def get_tsunamis():
         LIMIT 10'''
         cursor.execute(query)
 
-        # Iterate over the query results to produce the list of author names.
         for row in cursor:
             tsunamis.append({'source id': row[0],
                             'wave id': row[1],
@@ -92,19 +87,26 @@ def get_tsunamis():
                             'state': row[23],
                             'location': row[24],
                             'latitude': row[25],
-                            'longitude': row[26]
+                            'longitude': {row[26]}
                             })
 
     except Exception as e:
         print(e, file=sys.stderr)
 
     connection.close()
-    return tsunamis
+    return json.dumps(tsunamis, indent = 4)
 
 @app.route('/tsunamis/country_name', methods=['GET'])
 def get_tsunamis_by_country():
-    country_name = flask.request.args.get('country')
+    ''' Returns a list of all the tsuanmis that occured in a specific country and their related info. '''
+    country_name = flask.request.args.get('country', type=str)
     tsunamis = []
+    parameters = []
+    country_name = str.upper(country_name)
+    if country_name is not None:
+        parameters.append(country_name)
+    else:
+        return 'Please provide a country name.'
     try:
         query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
         WHERE tsunamis_attribute.WAVE_ID = tsunamis_destruction.WAVE_ID 
@@ -113,7 +115,8 @@ def get_tsunamis_by_country():
         ORDER BY wave_YEAR DESC'''
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(query, (country_name,))
+        cursor.execute(query, parameters)
+        print(cursor.query)
         for row in cursor:
             tsunamis.append({'source id': row[0],
                             'wave id': row[1],
@@ -146,22 +149,27 @@ def get_tsunamis_by_country():
     except Exception as e:
         print(e, file=sys.stderr)
     connection.close()
-    return tsunamis
+    return json.dumps(tsunamis, indent = 4)
 
 
 @app.route('/tsunamis/id', methods=['GET'])
 def get_tsunamis_by_wave_id():
-
+    ''' Returns a list of all the tsunamis and all of their info by wave id. '''
     id = flask.request.args.get('id', type=int)
     tsunamis = []
+    parameters = []
+    if id is not None:
+        parameters.append(id)
+    else:
+        return 'Please provide a wave id.'
     try:
         query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
         WHERE tsunamis_attribute.WAVE_ID = tsunamis_destruction.WAVE_ID
         AND tsunamis_destruction.WAVE_ID = tsunamis_place_time.WAVE_ID
-        AND tsunamis_attribute.WAVE_ID = %d'''
+        AND tsunamis_attribute.WAVE_ID = %s'''
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(query, (id,))
+        cursor.execute(query, parameters)
         for row in cursor:
             tsunamis.append({'source id': row[0],
                             'wave id': row[1],
@@ -196,25 +204,44 @@ def get_tsunamis_by_wave_id():
         print(e, file=sys.stderr)
 
     connection.close()
-    return tsunamis
+    return json.dumps(tsunamis, indent = 4)
 
 
 
 @app.route('/tsunamis/years', methods=['GET'])
 def get_tsunamis_by_year_range():
+    ''' Returns a list of all the tsuamis and all of their info between a start and end year. '''
     before = flask.request.args.get('start_year', type=float)
+    print(before)
     after = flask.request.args.get('end_year', type=float)
-
+    print(after)
     tsunamis = []
+    parameters = []
+    if before is not None:
+        parameters.append(before)
+    else:
+        return 'Please provide a start year.'
+    if after is not None:
+        parameters.append(after)
+    else:
+        return 'Please provide an end year.'
+    if before > after:
+        return 'Please provide a start year that is less than the end year.'
+    if before == after:
+        return 'Please provide a start year that is not equal to the end year.'
+    if before < -2000 or after > 2023:
+        return 'Please provide a start year that is greater than -2000 and an end year that is less than 2023.'
     try:
         query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
         WHERE tsunamis_attribute.WAVE_ID = tsunamis_destruction.WAVE_ID 
         AND tsunamis_destruction.WAVE_ID = tsunamis_place_time.WAVE_ID 
-        AND wave_year BETWEEN %f AND %f
+        AND tsunamis_place_time.wave_YEAR BETWEEN %s AND %s
         ORDER BY wave_YEAR DESC'''
+
         connection = get_connection()
         cursor = connection.cursor()
-        cursor.execute(query, (after, before))
+        cursor.execute(query, parameters)
+        print(cursor.query)
         for row in cursor:
             tsunamis.append({'source id': row[0],
                             'wave id': row[1],
@@ -249,8 +276,9 @@ def get_tsunamis_by_year_range():
         print(e, file=sys.stderr)
 
     connection.close()
-    return tsunamis
+    return json.dumps(tsunamis, indent = 4)
 
+@app.route('/tsunamis/country_years', methods=['GET'])
 def get_tsunamis_by_country_and_year_range():
     country = flask.request.args.get('country', type=str)
     start_year = flask.request.args.get('start_year', type=float)
@@ -261,8 +289,8 @@ def get_tsunamis_by_country_and_year_range():
         query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
         WHERE tsunamis_attribute.WAVE_ID = tsunamis_destruction.WAVE_ID 
         AND tsunamis_destruction.WAVE_ID = tsunamis_place_time.WAVE_ID 
-        AND wave_year BETWEEN %f AND %f
-        AND country = %s
+        AND tsunamis_place_time.wave_year BETWEEN %s AND %s
+        AND tsunamis_place_time.country = %s
         ORDER BY wave_YEAR DESC'''
         connection = get_connection()
         cursor = connection.cursor()
@@ -301,56 +329,7 @@ def get_tsunamis_by_country_and_year_range():
         print(e, file=sys.stderr)
 
     connection.close()
-    return tsunamis
-
-
-def main():
-    #Example #1: get a list of tsunamis
-    print('========== All tsunamis ==========')
-    tsunamis = get_tsunamis()
-    for tsunami in tsunamis:
-        print(type(tsunami))
-        print(f"{tsunami['wave year']} {tsunami['country']}")
-    print()
-
-    # Example #2: get a list of tsunamis by country
-    country = 'Japan'
-    print(f'========== All tsunamis in "{country}" ==========')
-    tsunamis = get_tsunamis_by_country(country)
-    
-    for tsunami in tsunamis:
-
-        print(f"{tsunami['wave year']} {tsunami['country']}")
-    print()
-
-    # Example #3: get a list of tsunamis by year range
-    start_year = 1900
-    end_year = 1999
-    print(f'========== All tsunamis between "{start_year}" and "{end_year}" ==========')
-    tsunamis = get_tsunamis_by_year_range(start_year, end_year)
-    for tsunami in tsunamis:
-        print(f"{tsunami['wave year']} {tsunami['country']}")
-    print()
-
-    # Example #4: get a list of tsunamis in a country by year range
-    country = 'Japan'
-    start_year = 1900
-    end_year = 1999
-    print(f'========== All tsunamis in "{country}" between "{start_year}" and "{end_year}" ==========')
-    tsunamis = get_tsunamis_by_country_and_year_range(country, start_year, end_year)
-    for tsunami in tsunamis:
-        print(f"{tsunami['wave year']} {tsunami['country']}")
-    print()
-
-    # Example #5: get a list of tsunamis by wave id
-    wave_id = 59
-    print(f'========== All tsunamis with wave id "{wave_id}" ==========')
-    tsunamis = get_tsunamis_by_wave_id(wave_id)
-    for tsunami in tsunamis:
-        print(f"{tsunamis}")
-    print()
-
-
+    return json.dumps(tsunamis, indent = 4)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('A sample Flask application/API')

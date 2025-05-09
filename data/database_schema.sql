@@ -1,13 +1,13 @@
 CREATE TABLE tsunamis_attribute (
    SOURCE_ID real NOT NULL,
    WAVE_ID real NOT NULL,
-   DISTANCE_FROM_SOURCE real NOT NULL,
+   DISTANCE_FROM_SOURCE real,
    TRAVEL_TIME_HOURS real,
    TRAVEL_TIME_MINUTES real,
-   VALIDITY real,
+   VALIDITY text,
    MEASUREMENT_TYPE real,
    wave_PERIOD real,
-   FIRST_MOTION real,
+   FIRST_MOTION text,
    MAXIMUM_HEIGHT real,
    HORIZONRTAL_INNUNDATION real
 );
