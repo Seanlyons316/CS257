@@ -1,195 +1,322 @@
+#!/usr/bin/env python3
 '''
-api.py
+    psycopg2-sample.py
+    Jeff Ondich, 23 April 2016
 
-Flask Endpoint Design and Implementation Assignment for CS257
-Author: Matvei Keshkekian
+    A very short, demo of how to use psycopg2 to connect to
+    and query a PostgreSQL database. This demo assumes a "books"
+    database like the one I've used in CS257 for the past few years,
+    including an authors table with fields
 
-NAME: api.py - api endpoint exercise
-SYNOPSIS: python3 api.py 
-DESCRIPTION: 
+        (id, given_name, surname, birth_year, death_year)
 
+    You might also want to consult the official psycopg2 tutorial
+    at https://wiki.postgresql.org/wiki/Psycopg2_Tutorial.
+
+    Also, SEE THE NOTE BELOW ABOUT config.py. It's important.
 '''
-import argparse
-import csv
+import sys
+import psycopg2
 import flask
 import json
-import sys
-
 
 app = flask.Flask(__name__)
 
-sources_file = '../data/sources.csv'
-waves_file = '../data/waves.csv'
-
-@app.route('/')
-def hello():
-    return 'Hello Tsunami researcher!'
-
-@app.route('/help')
-def get_help():
-    return flask.render_template('help.html')
-
-@app.route('/tsunami/<country>/ids')
-def get_tsunami_country(country):
-    ''' Returrns all of the tsunami IDs in the territory of a country.'''
-    tsunami_ids = []
-
-    with open (sources_file) as f:
-        reader = csv.reader(f)
-        next(reader)
-        for tsunami_row in reader:
-            if tsunami_row[11].strip().lower() == country.lower():
-                tsunami_ids.append(tsunami_row[0])
-
-    return json.dumps({
-        'country': country,
-        'tsunami_ids': tsunami_ids })
+# We're going to import our postgres username, password,
+# and database from a file named config.py, like so:
+import config
 
 
-@app.route('/tsunami/<country>/ids/years')
-def get_tsunami_ids(country):
-    '''Returns all of the tsunami ids in the terrritory of a country before or after certain year.'''
-    before = flask.request.args.get('before', type=int)
-    after = flask.request.args.get('after', type=int)
+def get_connection():
+    try:
+        return psycopg2.connect(database=config.database,
+                                user=config.user,
+                                password=config.password)
+    except Exception as e:
+        print(e, file=sys.stderr)
+        exit()
 
-    if before is None and after is None:
-        return 'Please supply ?before=YEAR and/or ?after=YEAR', 400
-    
-    tsunami_ids = []
-    
-    with open(sources_file) as f:
-        reader = csv.reader(f)
-        next(reader)
-        for tsunami_row in reader:
+@app.route('/tsunamis')
+def get_tsunamis():
+    ''' Returns a list of all the tsunamis and all of their info". '''
+    tsunamis = []
+    try:
+        # Create a "cursor", which is an object with which you can iterate
+        # over query results.
+        connection = get_connection()
+        cursor = connection.cursor()
 
-            if tsunami_row[11].strip().lower() != country.lower():
-                continue 
+        # Execute the query
+        query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
+        WHERE tsunamis_attribute.WAVE_ID = tsunami_destruction.WAVE_ID 
+        AND tsunami_destruction.WAVE_ID = tsunami_place_time.WAVE_ID 
+        ORDER BY wave_YEAR DESC'''
+        cursor.execute(query)
 
-            try: 
-                y = int(tsunami_row[1])
-            except ValueError:
-                continue
+        # Iterate over the query results to produce the list of author names.
+        for row in cursor:
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
+                            'distance from source': row[2],
+                            'travel time_hours': row[3],
+                            'validity': row[4],
+                            'measurement type': row[5],
+                            'wave period': row[6],
+                            'first motion': row[7],
+                            'max_height': row[8],
+                            'horizontal innundation': row[9],
+                            'injuries': row[10],
+                            'injury estimate': row[11],
+                            'deaths': row[12],
+                            'death estimate': row[13],
+                            'houses damaged': row[14],
+                            'houses damaged estimate': row[15],
+                            'houses destroyed': row[16],
+                            'houses destroyed estimate': row[17],
+                            'region code': row[18],
+                            'country': row[19],
+                            'wave year': row[20],
+                            'wave month': row[21],
+                            'wave day': row[22],
+                            'state': row[23],
+                            'location': row[24],
+                            'latitude': row[25],
+                            'longitude': row[26]
+                            })
 
-            if before is not None and y > before:
-                continue
-            if after is not None and y < after:
-                continue   
+    except Exception as e:
+        print(e, file=sys.stderr)
 
-            tsunami_ids.append(tsunami_row[0])
+    connection.close()
+    return json.dumps(tsunamis)
 
-            # country = tsunami_row[11].strip()
-            # if country not in tsunami_ids:
-            #     tsunami_ids[country] = [tsunami_row[0]]
-        
-    
-    return json.dumps({'country': country,
-                    'before': before,
-                    'after':  after,
-                    'tsunami_ids': tsunami_ids})
-
-
-
-@app.route('/tsunami/<country>/count/years')
-def get_tsunami_num(country):
-    ''' Returns the amount of tsunamis in the territory of a country between year X and Y, case-insensitively. '''
-    before = flask.request.args.get('before', type=int)
-    after = flask.request.args.get('after', type=int)
-
-    if before is None and after is None:
-        return 'Please supply ?before=YEAR and/or ?after=YEAR', 400
-    
-    tsunamis = 0
-    country = country.strip().lower()
-
-    with open(sources_file) as f:
-        reader = csv.reader(f)
-        next(reader)  
-        for tsunami_row in reader:
-
-            try:
-                y = int(tsunami_row[1])
-            except ValueError:
-                continue
-
-            if before is not None and y > before:
-                continue
-            if after is not None and y < after:
-                continue  
-
-            if tsunami_row[11].strip().lower() == country:
-                tsunamis += 1
-
-    return json.dumps({
-        'country': country,
-        'year1': after,
-        'year2': before,
-        'tsunami_count': tsunamis
-    })
+@app.route('/tsunamis/country_name', methods=['GET'])
+def get_tsunamis_by_country():
+    country_name = flask.request.args.get('country')
+    tsunamis = []
+    try:
+        query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
+        WHERE tsunamis_attribute.WAVE_ID = tsunami_destruction.WAVE_ID 
+        AND tsunami_destruction.WAVE_ID = tsunami_place_time.WAVE_ID 
+        AND tsunamis_place_time.country = %s
+        ORDER BY wave_YEAR DESC'''
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query, (country_name,))
+        for row in cursor:
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
+                            'distance from source': row[2],
+                            'travel time_hours': row[3],
+                            'validity': row[4],
+                            'measurement type': row[5],
+                            'wave period': row[6],
+                            'first motion': row[7],
+                            'max_height': row[8],
+                            'horizontal innundation': row[9],
+                            'injuries': row[10],
+                            'injury estimate': row[11],
+                            'deaths': row[12],
+                            'death estimate': row[13],
+                            'houses damaged': row[14],
+                            'houses damaged estimate': row[15],
+                            'houses destroyed': row[16],
+                            'houses destroyed estimate': row[17],
+                            'region code': row[18],
+                            'country': row[19],
+                            'wave year': row[20],
+                            'wave month': row[21],
+                            'wave day': row[22],
+                            'state': row[23],
+                            'location': row[24],
+                            'latitude': row[25],
+                            'longitude': row[26]
+                            })
+    except Exception as e:
+        print(e, file=sys.stderr)
+    connection.close()
+    return tsunamis
 
 
-@app.route('/tsunami/<country>/damage')
-def get_tsunami_damage(country):
-    '''Returns the amount of millions of dollars damage caused by tsunamis in the territory of a country.'''
-    dollars = 0
+@app.route('/tsunamis/id', methods=['GET'])
+def get_tsunamis_by_wave_id():
 
-    with open(waves_file) as f:
-        reader = csv.reader(f)
-        next(reader)
-        for tsunami_row in reader:
-            if tsunami_row[6].strip().lower() == country.lower():
+    id = flask.request.args.get('id', type=int)
+    tsunamis = []
+    try:
+        query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
+        WHERE tsunamis_attribute.WAVE_ID = tsunami_destruction.WAVE_ID
+        AND tsunami_destruction.WAVE_ID = tsunami_place_time.WAVE_ID
+        AND tsunamis_attribute.WAVE_ID = %d'''
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query, (id,))
+        for row in cursor:
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
+                            'distance from source': row[2],
+                            'travel time_hours': row[3],
+                            'validity': row[4],
+                            'measurement type': row[5],
+                            'wave period': row[6],
+                            'first motion': row[7],
+                            'max_height': row[8],
+                            'horizontal innundation': row[9],
+                            'injuries': row[10],
+                            'injury estimate': row[11],
+                            'deaths': row[12],
+                            'death estimate': row[13],
+                            'houses damaged': row[14],
+                            'houses damaged estimate': row[15],
+                            'houses destroyed': row[16],
+                            'houses destroyed estimate': row[17],
+                            'region code': row[18],
+                            'country': row[19],
+                            'wave year': row[20],
+                            'wave month': row[21],
+                            'wave day': row[22],
+                            'state': row[23],
+                            'location': row[24],
+                            'latitude': row[25],
+                            'longitude': row[26]
+                            })
 
-                dol = tsunami_row[24].strip()
-                if not dol:
-                    continue
+    except Exception as e:
+        print(e, file=sys.stderr)
 
-                try:
-                    dmg = float(dol.replace(',', ''))
-                except ValueError:
-                    continue
+    connection.close()
+    return tsunamis
 
-                dollars += dmg
 
-    return json.dumps({'country': country, 
-                    'damage_millions': dollars})
- 
 
-@app.route('/tsunami/years')
-def get_tsunami_countries():
-    '''Returns all of the countries that have had tsunamis either before or after certain year.'''
-    before = flask.request.args.get('before', type=int)
-    after = flask.request.args.get('after', type=int)
+@app.route('/tsunamis/years', methods=['GET'])
+def get_tsunamis_by_year_range():
+    before = flask.request.args.get('start_year', type=float)
+    after = flask.request.args.get('end_year', type=float)
 
-    if before is None and after is None:
-        return 'Please supply ?before=YEAR and/or ?after=YEAR', 400
-    
-    countries = set()
-    
-    with open(sources_file) as f:
-        reader = csv.reader(f)
-        next(reader)
-        for tsunami_row in reader:
-            try:
-                y = int(tsunami_row[1])
-            except ValueError:
-                continue
+    tsunamis = []
+    try:
+        query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
+        WHERE tsunamis_attribute.WAVE_ID = tsunami_destruction.WAVE_ID 
+        AND tsunami_destruction.WAVE_ID = tsunami_place_time.WAVE_ID 
+        AND wave_year BETWEEN %f AND %f
+        ORDER BY wave_YEAR DESC'''
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query, (after, before))
+        for row in cursor:
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
+                            'distance from source': row[2],
+                            'travel time_hours': row[3],
+                            'validity': row[4],
+                            'measurement type': row[5],
+                            'wave period': row[6],
+                            'first motion': row[7],
+                            'max_height': row[8],
+                            'horizontal innundation': row[9],
+                            'injuries': row[10],
+                            'injury estimate': row[11],
+                            'deaths': row[12],
+                            'death estimate': row[13],
+                            'houses damaged': row[14],
+                            'houses damaged estimate': row[15],
+                            'houses destroyed': row[16],
+                            'houses destroyed estimate': row[17],
+                            'region code': row[18],
+                            'country': row[19],
+                            'wave year': row[20],
+                            'wave month': row[21],
+                            'wave day': row[22],
+                            'state': row[23],
+                            'location': row[24],
+                            'latitude': row[25],
+                            'longitude': row[26]
+                            })
 
-            if before is not None and y > before:
-                continue
-            if after  is not None and y < after:
-                continue
+    except Exception as e:
+        print(e, file=sys.stderr)
 
-            countries.add(tsunami_row[11].strip())
+    connection.close()
+    return tsunamis
 
-    return json.dumps({'before': before,
-                    'after': after,
-                    'countries': list(countries)})
+def get_tsunamis_by_country_and_year_range():
+    country = flask.request.args.get('country', type=str)
+    start_year = flask.request.args.get('start_year', type=float)
+    end_year = flask.request.args.get('end_year', type=float)
+    tsunamis = []
+    try:
+        query = '''SELECT * FROM tsunamis_attribute, tsunamis_destruction, tsunamis_place_time
+        WHERE tsunamis_attribute.WAVE_ID = tsunami_destruction.WAVE_ID 
+        AND tsunami_destruction.WAVE_ID = tsunami_place_time.WAVE_ID 
+        AND wave_year BETWEEN %f AND %f
+        AND country = %s
+        ORDER BY wave_YEAR DESC'''
+        connection = get_connection()
+        cursor = connection.cursor()
+        cursor.execute(query, (start_year, end_year, country))
+        for row in cursor:
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
+                            'distance from source': row[2],
+                            'travel time_hours': row[3],
+                            'validity': row[4],
+                            'measurement type': row[5],
+                            'wave period': row[6],
+                            'first motion': row[7],
+                            'max_height': row[8],
+                            'horizontal innundation': row[9],
+                            'injuries': row[10],
+                            'injury estimate': row[11],
+                            'deaths': row[12],
+                            'death estimate': row[13],
+                            'houses damaged': row[14],
+                            'houses damaged estimate': row[15],
+                            'houses destroyed': row[16],
+                            'houses destroyed estimate': row[17],
+                            'region code': row[18],
+                            'country': row[19],
+                            'wave year': row[20],
+                            'wave month': row[21],
+                            'wave day': row[22],
+                            'state': row[23],
+                            'location': row[24],
+                            'latitude': row[25],
+                            'longitude': row[26]
+                            })
 
-   
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+    connection.close()
+    return tsunamis
+
+
+def main():
+    # Example #1: get a list of author names
+    print('========== All authors ==========')
+    authors = get_authors()
+    for author in authors:
+        print(f"{author['given_name']} {author['surname']}")
+    print()
+
+    # Example #2: get a list of authors whose surnames equal a search string
+    surname = 'Brontë'
+    print(f'========== All authors with surname "{surname}" ==========')
+    authors = get_authors_by_surname(surname)
+    for author in authors:
+        print(f"{author['given_name']} {author['surname']}")
+    print()
+
+    # Example #3: get a list of authors whose surnames contain a search string
+    search_text = 'is'
+    print(f'========== All authors whose surnames contain "{search_text}" ==========')
+    authors = get_matching_authors(search_text)
+    for author in authors:
+        print(f"{author['given_name']} {author['surname']}")
+    print()
+
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('A tsunami Flask API')
-    parser.add_argument('host', help='the host on which this application is running')
-    parser.add_argument('port', type=int, help='the port on which this application is listening')
-    arguments = parser.parse_args()
-    app.run(host=arguments.host, port=arguments.port, debug=True)
+    main()
 
