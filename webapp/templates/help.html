@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Movie API reference</title>
+    <title>Tsunami API reference</title>
 </head>
 <body>
-    <pre>Tsunami API: endpoint reference
+    <pre>
+Tsunami API: endpoint reference
 All responses are in JSON
 
 REQUEST: /
@@ -13,37 +14,27 @@ RESPONSE:
 
 REQUEST: /help
 RESPONSE:
-    This message
-    A brief list of some of the endpoints we wish to implement.
+    This help page.
 
-REQUEST: /tsunami/id/{id}
-RESPONSE: 
-    A table of all the information about the tsunami with that specified ID. This information includes date, time, magnitude, damage, etc.
-    
 REQUEST: /tsunamis
-GET PARAMETER: return a list of tsunamis with known attributes like damage, deaths, cost of damages, etc.. default = '' and do not return tsunamis where this parameter is not known.
 RESPONSE:
-    A list of the tsunamis for which there is known information about the specified attributes.
+    A list of the most recent 10 tsunamis with all available fields.
 
-All of the ones below will be merged into the GET parameter above.
-
-REQUEST: /tsunamis/years[?before={YEAR}&amp;after={YEAR}]
+REQUEST: /tsunamis/country_name?country={COUNTRY_NAME}
 RESPONSE:
-    A list of all of the countries that have had recorded tsunamis either before or after the specified year.
+    A list of all recorded tsunamis in the specified country.
 
-REQUEST: /tsunamis/country/{country_name}
+REQUEST: /tsunamis/id?id={WAVE_ID}
 RESPONSE:
-    A list of all of the recorded tsunamis and their info that have occurred in the territory of the specified country.
+    Detailed information about the tsunami with the given wave ID.
 
-REQUEST: /tsunamis/{country_name}/years[?before={YEAR}&amp;after={YEAR}]
+REQUEST: /tsunamis/years?start_year={YEAR}&end_year={YEAR}
 RESPONSE:
-    A list of all of the recorded tsunamis that have occurred in the specified country.
-    If before={YEAR} is specified, only tsunamis that occurred before that year are returned.
-    If after={YEAR} is specified, only tsunamis that occurred after that year are returned.  
-    If the country name null then returns all of the tsunamis for all of the countries and years
-    
+    A list of all tsunamis that occurred between the specified years (inclusive).
 
+REQUEST: /tsunamis/country_years?country={COUNTRY_NAME}&start_year={YEAR}&end_year={YEAR}
+RESPONSE:
+    A list of all tsunamis in the specified country between the given years.
     </pre>
 </body>
 </html>
-

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 '''
+    Adapted by Sean Lyons and Matvei Keshkekian
+    May 2025, Software Design API implementation
+
     psycopg2-sample.py
     Jeff Ondich, 23 April 2016
 
@@ -21,12 +24,11 @@ import flask
 import json
 import argparse
 
-app = flask.Flask(__name__)
-
 # We're going to import our postgres username, password,
 # and database from a file named config.py, like so:
 import config
 
+app = flask.Flask(__name__)
 
 def get_connection():
     try:
@@ -94,7 +96,7 @@ def get_tsunamis():
                             'state': row[23],
                             'location': row[24],
                             'latitude': row[25],
-                            'longitude': {row[26]}
+                            'longitude': row[26]
                             })
 
     except Exception as e:
@@ -107,9 +109,16 @@ def get_tsunamis():
 def get_tsunamis_by_country():
     ''' Returns a list of all the tsuanmis that occured in a specific country and their related info. '''
     country_name = flask.request.args.get('country', type=str)
+
+    if not country_name:
+        return 'Please provide a country name.', 400
+
+    country_name = str.upper(country_name)
+    
+    
     tsunamis = []
     parameters = []
-    country_name = str.upper(country_name)
+
     if country_name is not None:
         parameters.append(country_name)
     else:
@@ -374,4 +383,3 @@ if __name__ == '__main__':
     parser.add_argument('port', type=int, help='the port on which this application is listening')
     arguments = parser.parse_args()
     app.run(host=arguments.host, port=arguments.port, debug=True)
-
