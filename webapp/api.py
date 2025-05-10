@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 '''
-    Adapted by Sean Lyons and Matvei Keshkekian
+    Adapted by Sean Lyons and Matvei Keshkekian, May 2025
     May 2025, Software Design API implementation
+    Original code by Jeff Ondich, 23 April 2016
 
-    psycopg2-sample.py
-    Jeff Ondich, 23 April 2016
+    This is a flask web application that provides an API for the Tsunami database. 
+    It makes use of the psycopg2 library to connect to a PostgreSQL database and retrieve data from it. 
 
-    A very short, demo of how to use psycopg2 to connect to
-    and query a PostgreSQL database. This demo assumes a "books"
-    database like the one I've used in CS257 for the past few years,
-    including an authors table with fields
-
-        (id, given_name, surname, birth_year, fatality_year)
-
-    You might also want to consult the official psycopg2 tutorial
-    at https://wiki.postgresql.org/wiki/Psycopg2_Tutorial.
-
-    Also, SEE THE NOTE BELOW ABOUT config.py. It's important.
+    It provides the following endpoints:
+    /tsunamis: Returns a list of all the tsunamis and all of their info.
+    /tsunamis/all_ids: Returns a list of all the ids.
+    /tsunamis/all_countries: Returns a list of all the countries that have tsunamis.
+    /tsunamis/country_name: Returns a list of all the tsunamis that occured in a specific country and their related info.
+    /tsunamis/id: Returns a list with just the tsunami matching that id and its related info.
+    /tsunamis/years: Returns a list of all the tsuamis and all of their info between a start and end year.
+    /tsunamis/country_years: Returns a list of all the tsuamis and all of their info between a start and end year in a specific country.
+    /tsunamis/help: Returns a simple help page.
+    /: Returns a simple greeting.
 '''
 import sys
 import psycopg2
