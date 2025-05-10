@@ -105,6 +105,46 @@ def get_tsunamis():
     connection.close()
     return json.dumps(tsunamis, indent = 4)
 
+@app.route('/tsunamis/all_ids', methods=['GET'])
+def get_all_tsunami_ids():
+    ''' Returns a list of all the tsunamis and their ids. '''
+    tsunamis = []
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        query = '''SELECT ta.WAVE_ID
+        FROM tsunamis_attribute AS ta
+        ORDER BY ta.WAVE_ID DESC'''
+        cursor.execute(query)
+        for row in cursor:
+            tsunamis.append({'wave id': row[0]})
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+    connection.close()
+    return json.dumps(tsunamis, indent = 4)
+
+@app.route('/tsunamis/all_countries', methods=['GET'])
+def get_tsunamis_by_country_list():
+    ''' Returns a list of all the countries that have tsunamis. '''
+    tsunamis = []
+    try:
+        connection = get_connection()
+        cursor = connection.cursor()
+        query = '''SELECT DISTINCT tp.country
+        FROM tsunamis_place_time AS tp
+        ORDER BY tp.country DESC'''
+        cursor.execute(query)
+        for row in cursor:
+            tsunamis.append({'country': row[0]})
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+    connection.close()
+    return json.dumps(tsunamis, indent = 4)
+
+
+
 @app.route('/tsunamis/country_name', methods=['GET'])
 def get_tsunamis_by_country():
     ''' Returns a list of all the tsuanmis that occured in a specific country and their related info. '''
