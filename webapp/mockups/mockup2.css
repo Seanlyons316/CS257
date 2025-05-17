@@ -1,0 +1,132 @@
+body {
+    margin: 10px;
+    padding: 0px;
+    height: 100%;
+    text-indent: 15%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: 500px;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+a {
+    font-family: Helvetica, Arial serif;
+    font-size: 18pt;
+}
+
+p {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 18pt;
+}   
+    
+.blue {
+    color: blue;
+    font-family:'Courier New', Courier, monospace;
+
+}
+
+.r_sidenav{
+    width: 20%;
+    height: 20%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding-top: 10px;
+    background-color: orange;
+}
+
+.r_sidenav a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+.r_sidenav a:hover {
+    color: grey;
+}
+
+.l_sidenav { 
+    width: 230px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 10px;
+    background-color: rgb(37, 37, 245);
+
+}
+  
+.l_sidenav a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black    ;
+    display: block;
+}
+
+.l_sidenav b {
+    padding:    8px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+}
+  
+.l_sidenav a:hover {
+    color: grey;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-left: 15px;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 0; 
+    background-color: #3498db;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+    margin-left: 15px;
+}
+  
+  .dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+    font-size: 16px;
+}
+  
+  .dropdown-content a:hover {
+    background-color: #e0e0e0;
+}
+  
+  .show { 
+    display: block;
+}
