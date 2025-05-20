@@ -1,7 +1,38 @@
 p  {
     font-family:'Courier New', Courier, monospace;
-    font-size: 14pt;
+    font-size: 8pt;
 }
+
+.table_container {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+}
+
+#tsunamis_table {
+    min-width: none;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+#tsunamis_table th, #tsunamis_table td {
+    padding: 4px;
+    border: 1px solid #ccc;
+    text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 70px; /* Set a max width for the cells */
+    white-space: normal; /* Allow text to wrap */
+}
+
+#tsunamis_table th {
+    top: 0;
+    background-color: #f2f2f2;
+}
+
 
 body {
     margin: 0;

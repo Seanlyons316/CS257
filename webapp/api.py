@@ -28,7 +28,7 @@ import argparse
 # and database from a file named config.py, like so:
 import config
 
-app = flask.Flask(__name__)
+app = flask.Blueprint('api', __name__)
 
 def get_connection():
     try:

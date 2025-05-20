@@ -1,20 +1,16 @@
-/*
- * tsunamis.js
- * Sean Lyons and Matvei Keshkekian, 19 May, 2025
- * Adpted from books.js Jeff Ondich, 27 April 2016
- */
-
 window.addEventListener("load", initialize);
 
 function initialize() {
     let element = document.getElementById('tsunami_search_button');
+    let resetElement = document.getElementById('tsunami_reset_button');
     if (element) {
         element.onclick = onTsunamisSearchChanged;
     }
+    if (resetElement) {
+        resetElement.onclick = onResetSearch;
+    }
 }
 
-// Returns the base URL of the API, onto which endpoint
-// components can be appended.
 function getAPIBaseURL() {
     let baseURL = window.location.protocol
                     + '//' + window.location.hostname
@@ -23,19 +19,25 @@ function getAPIBaseURL() {
     return baseURL;
 }
 
-
 function onTsunamisSearchChanged() {
     let input = document.getElementById('tsunami_search_input');
     if (!input) {
         return;
     }
-    let year = input.value.trim();
-    if (year === '') {
+
+    let yearString = input.value.trim();
+    if (yearString === '') {
         return;
     }
 
-    let url = getAPIBaseURL() + '/tsunamis/years?start_year='+year+'&end_year='+year;
+    let year = parseInt(yearString);
+    if (isNaN(year)) {
+        return;
+    }
 
+    let nextYearString = (year + 1).toString();
+
+    let url = getAPIBaseURL() + '/tsunamis/years?start_year=' + yearString + '&end_year=' + nextYearString;
     fetch(url, {method: 'get'})
 
     .then((response) => response.json())
@@ -72,10 +74,10 @@ function onTsunamisSearchChanged() {
                             + '<td>' + tsunami['location'] + '</td>'
                             + '<td>' + tsunami['latitude'] + '</td>'
                             + '<td>' + tsunami['longitude'] + '</td>'
+                            + '</tr>';
         }
 
-        // Put the table body we just built inside the table that's already on the page.
-        let tsunamisTable = document.getElementById('tsunamis_table');
+        let tsunamisTable = document.querySelector('#tsunamis_table tbody');
         if (tsunamisTable) {
             tsunamisTable.innerHTML = tableBody;
         }
@@ -84,4 +86,16 @@ function onTsunamisSearchChanged() {
     .catch(function(error) {
         console.log(error);
     });
+}
+
+// ✅ Move this OUTSIDE the other function
+function onResetSearch() {
+    let input = document.getElementById('tsunami_search_input');
+    if (input) {
+        input.value = '';
+    }
+    let tsunamisTable = document.querySelector('#tsunamis_table tbody');
+    if (tsunamisTable) {
+        tsunamisTable.innerHTML = '';
+    }
 }

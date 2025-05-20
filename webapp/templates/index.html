@@ -13,14 +13,46 @@
 
     <input type="text" id="tsunami_search_input" placeholder="Enter year...">
     <button id="tsunami_search_button">Search</button>
+    <button id="tsunami_reset_button">Reset</button>
 
-    <p><table id="results_table"></table></p>
-
-
-    <div class="sidenav_container">
-        <a href="#search" class="sidenav centerleft_sidenav">SEARCH TSUNAMIS BY QUERY</a>
-        <a href="#map" class="sidenav center_sidenav">MAP SEARCH</a>
-        <a href="#help" class="sidenav centerright_sidenav">HELP AND INFO</a>
-  </div>
+    <div class="table_container">
+        <table id="tsunamis_table">
+            <thead>
+                <tr>
+                    <th>Source ID</th>
+                    <th>Wave ID</th>
+                    <th>Distance</th>
+                    <th>Travel Time (hrs)</th>
+                    <th>Validity</th>
+                    <th>Measurement</th>
+                    <th>Period</th>
+                    <th>First Motion</th>
+                    <th>Max Height</th>
+                    <th>Inundation</th>
+                    <th>Injuries</th>
+                    <th>Injuries Est.</th>
+                    <th>Fatalities</th>
+                    <th>Fatalities Est.</th>
+                    <th>Houses Damaged</th>
+                    <th>Houses Damaged Est.</th>
+                    <th>Houses Destroyed</th>
+                    <th>Houses Destroyed Est.</th>
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Day</th>
+                    <th>State</th>
+                    <th>Location</th>
+                    <th>Lat</th>
+                    <th>Lon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JavaScript inserts rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

@@ -10,13 +10,12 @@
 '''
 import sys
 import flask
-import books_api
-
+import api as api
 ########### Initializing Flask ###########
 # Note that this stuff has to be up here at the top, because otherwise
 # the @app.route lines would raise a "name not defined" exception.
 app = flask.Flask(__name__, static_folder='static', template_folder='templates')
-app.register_blueprint(books_api.api, url_prefix='/api')
+app.register_blueprint(api.app, url_prefix='/api')
 
 
 ########### The website routes ###########
