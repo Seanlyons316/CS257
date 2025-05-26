@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Tsunami Tracker</title>
-    <link rel="stylesheet" href="mockup1.css" type="text/css" />
-    <script src="mockup1.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mockup1.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='mockup1.js') }}" ></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 </head>
 <body>
   <div class="main_wrapper">
-    <h1 class="title_center">TSUNAMI TRACKER MAIN MENU</h1>
+    <h1 class="title_center">TSUNAMI ARCHIVE MAIN MENU</h1>
 
-    <div class="sidenav_container">
-        <a href="#search" class="sidenav centerleft_sidenav">SEARCH TSUNAMIS BY QUERY</a>
-        <a href="#map" class="sidenav center_sidenav">MAP SEARCH</a>
-        <a href="#help" class="sidenav centerright_sidenav">HELP AND INFO</a>
+    <div class = "my_button_container">
+      <button class="my_button" id = "tsunami_search_button" onclick = "SendtoPage('search')">Search By List Page</button>
+      <button class="my_button" id = "world_map" onclick = "SendtoPage('map')">Search By Map Page</button>
+      <button class="my_button" id = "tsunami_help" onclick = "SendtoPage('help')">Help Page</button>
+    </div>
   </div>
 </body>
 </html>
