@@ -1,96 +1,78 @@
+/* base stuff */
 body {
-    margin: 10px;
-    padding: 0px;
-    height: 100%;
-    text-indent: 15%;
+    font-family: 'Courier New', Courier, monospace;
+    color: #023047;
+    margin: 0 0 0 245px;
+    text-align: center;
 }
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    height: 500px;
-    width: 100%;
-    margin-top: 50px;
-    margin-bottom: 50px;
+header {
+    padding: 20px;
+    text-align: center;
+}
+  
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #023047;
 }
 
 a {
-    font-family: Helvetica, Arial serif;
-    font-size: 18pt;
+    text-decoration: none;
+    color: #023047;
+    padding-left: 10px;
 }
 
 p {
-    font-family:'Courier New', Courier, monospace;
-    font-size: 18pt;
-}   
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding-left: 15px;
+}
     
+/* layout stuff */
+
+.bigger {
+    font-size: 24px;
+}
+.container {
+    display: flex;
+}
+
 .blue {
-    color: blue;
-    font-family:'Courier New', Courier, monospace;
-
+    color: #219ebc;
 }
 
-.r_sidenav{
-    width: 20%;
-    height: 20%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    padding-top: 10px;
-    background-color: orange;
+.white {
+    color: white;
 }
 
-.r_sidenav a {
-    padding: 8px;
-    text-decoration: none;
-    font-size: 18px;
-    color: black;
-    display: block;
-}
-
-.r_sidenav a:hover {
-    color: grey;
-}
-
-.l_sidenav { 
+.sidenav { 
     width: 230px;
     height: 100%;
-    position: fixed;
+    /* min-height:  300vh; */
+    background-color: #023047;
     top: 0;
     left: 0;
     padding-top: 20px;
-    background-color: rgb(37, 37, 245);
-
-}
-
-.centerleft_sidenav {
-    width: 230px;
-    height: 100%;
     position: fixed;
-    top: 0;
-    left: 0;
-    padding-top: 20px;
-    background-color: rgb(37, 37, 245);
+    box-sizing: border-box;
 }
   
-.l_sidenav a {
-    padding: 8px;
-    font-size: 25px;
-    color: black;
-    display: block;
+.sidenav .dropbtn {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 5px 15px;
+  padding: 10px;
+  text-decoration: none;
+  text-align: left;
+  border-radius: 10px;
 }
+  
 
-.l_sidenav b {
-    padding:    8px;    
-    font-size: 25px;
-    color: black;
-    display: block;
-}
-  
-.l_sidenav a:hover {
-    color: grey;
-}
+/* is not needed: */
+/* .sidenav a:hover {
+    color:  #8ecae6;
+} */
 
 .dropdown {
     position: relative;
@@ -109,6 +91,10 @@ p {
     margin-left: 15px;
 }
 
+.dropbtn:hover {
+    background-color: #2980b9;
+    color: white;
+}   
 
 .dropbtn a:hover {
     background-color: #2980b9;
@@ -126,9 +112,10 @@ p {
     z-index: 1;
     margin-left: 15px;
 }
+
   
 .dropdown-content a {
-    color: black;
+    color: white;
     padding: 10px 16px;
     text-decoration: none;
     display: block;
@@ -137,8 +124,20 @@ p {
 }
   
 .dropdown-content a:hover {
-    background-color: #e0e0e0;
+    background-color: #8ecae6;
+    color: white;
 }
+
+#high-btn,
+#low-btn {
+  display: inline-block;    
+  width: auto;              
+  white-space: normal;      
+  margin: 5px 15px;        
+}
+
+
+/* table styling stuff below */
 
 table {
     border-collapse: collapse;
@@ -158,7 +157,6 @@ tr:hover {
     cursor: pointer;
 }
 
-  
 .show { 
     display: block;
 }

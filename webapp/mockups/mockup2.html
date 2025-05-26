@@ -1,112 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <script src="mockup2.js"></script>
-        <link rel="stylesheet" href="mockup2.css" type="text/css" />
-        <h1 class="blue p">TSUNAMI SEARCH</h1>
-    </head>
+  <head>
+      <meta charset="UTF-8">
+      <script src="mockup2.js"></script>
+      <link rel="stylesheet" href="mockup2.css" type="text/css" />
+      <title>Tsunami Archive Search</title>
+      <script src="mockup2.js" defer></script>
+  </head>
 
-    <body>         
-        <p>Search for a tsunami by specific year, location, country name, or ID</p>
-        <form action="search.html" method="get">
-            <input type="text" name="search" placeholder="Search...">
-            <input type="submit" value="Submit">
-        </form>
-          <h2>Search Results for Year: 2002</h2>
-          <table cellspacing="0" cellpadding="5">
-            <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Location</th>
-                  <th>Country</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>25</td>
-                  <td>Hokkaido</td>
-                  <td>Japan</td>
-                  <td>2002-09-26</td>
-                </tr>
-                <tr>
-                  <td>67</td>
-                  <td>New Guinea</td>
-                  <td>Papua New Guinea</td>
-                  <td>2002-11-05</td>
-                </tr>
-                <tr>
-                  <td>325</td>
-                  <td>Solomon Islands</td>
-                  <td>Solomon Islands</td>
-                  <td>2002-04-13</td>
-                </tr>
-              </tbody>
-          </table>
+  <body>
 
-<!-- 
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-              <a href="#">Option 1</a>
-              <a href="#">Option 2</a>
-              <a href="#">Option 3</a>
-            </div>
-          </div> -->
+    <header>
+      <h1 class="blue">Tsunami Archive Search</h1>       
+      <p>Search for a tsunami by specific year, location, country name, or ID</p>
+      <form action="search.html" method="get">
+          <input type="text" name="search" placeholder="Search...">
+          <input type="submit" value="Submit">
+      </form>
+      <p>Showing results for: 2002 <br> Select the tsunami that you interested in:</p>
+    <table cellspacing="0" cellpadding="5">
+      <thead>
+          <tr>
+            <th>ID</th>
+            <th>Location</th>
+            <th>Country</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>25</td>
+            <td>Hokkaido</td>
+            <td>Japan</td>
+            <td>2002-09-26</td>
+          </tr>
+          <tr>
+            <td>67</td>
+            <td>New Guinea</td>
+            <td>Papua New Guinea</td>
+            <td>2002-11-05</td>
+          </tr>
+          <tr>
+            <td>325</td>
+            <td>Solomon Islands</td>
+            <td>Solomon Islands</td>
+            <td>2002-04-13</td>
+          </tr>
+        </tbody>
+    </table>
 
-    <div class="container">
-        <div class="l_sidenav">
-        <a href="#home">HOME</a>
-        <p>Search by:</p>
-        <!-- <div class="dropdown">
-            <button id="years-btn" class="dropbtn">Years</button>
-            <div id="years-menu" class="dropdown-content">
-              <a href="#2000">2000</a>
-              <a href="#2001">2001</a>
-              <a href="#2002">2002</a>
-              <a href="#2003">2003</a>
-              <a href="#2004">2004</a>
-            </div>p
-        </div> -->
-        <div class="dropdown">
-            <button id="measurements-btn" class="dropbtn">Measurements</button>
-            <div id="measurements-menu" class="dropdown-content">
-              <a href="#distance">Distance From Source</a>
-              <a href="#hours">Travel Time Hours</a>
-              <a href="#minutes">Travel Time Minutes</a>
-              <a href="#validity">Validity</a>
-              <a href="#measurement">Measurement Type</a>
-              <a href="#period">Wave Period</a>
-              <a href="#motion">First Motion</a>
-              <a href="#heigh">Maximum Height</a>
-              <a href="#innundation">Horizontal Innundation</a>
-            </div>
+    </header>
+
+  <div class="container">
+    <div class="sidenav"> 
+      <a href="#home" class="white bigger">TsunamiArchive</a>
+      <!-- <button id="home-btn" class="dropbtn">Home</button> -->
+      <p class="blue">Search by:</p>
+
+      <div class="dropdown">
+        <button id="measurements-btn" class="dropbtn">Measurements</button>
+        <div id="measurements-menu" class="dropdown-content">
+          <a href="#distance">Distance From Source</a>
+          <a href="#hours">Travel Time Hours</a>
+          <a href="#minutes">Travel Time Minutes</a>
+          <a href="#validity">Validity</a>
+          <a href="#measurement">Measurement Type</a>
+          <a href="#period">Wave Period</a>
+          <a href="#motion">First Motion</a>
+          <a href="#height">Maximum Height</a>
+          <a href="#innundation">Horizontal Innundation</a>
         </div>
-        <div class="dropdown">
-            <button id="damages-btn" class="dropbtn">Damages</button>
-            <div id="damages-menu" class="dropdown-content">
-              <a href="#injuries">Injuries</a>
-              <a href="#injuriesest">Injuries Estimate</a>
-              <a href="#fatalities">Fatalities</a>
-              <a href="#fatalitiesest">Fatalities Estimate</a>
-              <a href="#damage">Damage Millions USD</a>
-              <a href="#damageest">Damage Millions Estimate</a>
-              <a href="#houses">Houses Damage</a>
-              <a href="#houesesest">Houses Damage Estimate</a>
-              <a href="#destroyed">Houeses Destroyed</a>
-              <a href="#destroyedest">Houses Destroyed Estimate</a>
-            </div>
-        </div> 
-      
-        <div class="r_sidenav">
-        <p> Sort by:</p>
-        <a href="#highest">Highest to Lowest</a>
-        <a href="#lowest">Lowest to Highest</a>
+      </div>
+      <div class="dropdown">
+        <button id="damages-btn" class="dropbtn">Damages</button>
+        <div id="damages-menu" class="dropdown-content">
+          <a href="#injuries">Injuries</a>
+          <a href="#injuriesest">Injuries Estimate</a>
+          <a href="#fatalities">Fatalities</a>
+          <a href="#fatalitiesest">Fatalities Estimate</a>
+          <a href="#damage">Damage Millions USD</a>
+          <a href="#damageest">Damage Millions Estimate</a>
+          <a href="#houses">Houses Damage</a>
+          <a href="#houesesest">Houses Damage Estimate</a>
+          <a href="#destroyed">Houeses Destroyed</a>
+          <a href="#destroyedest">Houses Destroyed Estimate</a>
         </div>
+      </div> 
+
+      <p class="blue"> Sort by:</p>
+      <!-- <button id="high-btn" class="dropbtn" href="#ascending">Ascending</button>
+      <button id="low-btn" class="dropbtn" href="descending">Descending</button> -->
+
+      <!-- to make them clickable -->
+      <button id="high-btn" class="dropbtn sort-btn" onclick="location.href = '#ascending'">Ascending</button>
+      <button id="low-btn" class="dropbtn sort-btn" onclick="location.href = '#descending'">Descending</button>
     </div>
+  </div>
 
-    <script src="mockup2.js"></script>
 
 </body>
 
