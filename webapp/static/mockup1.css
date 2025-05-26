@@ -4,12 +4,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;
+    background-color: #d6e5f0;
     font-family: Helvetica, Arial, sans-serif;
 }
 
 /* I used chatgpt for this mainwrapper code here and where to place it in my HTML */
 .main_wrapper {
+    color: goldenrod;
     width: 90vw;
     max-width: 1200px;
     display: flex;
@@ -18,41 +19,97 @@ body {
     padding: 2em 1em
 }
 
+
 .title_center {
+    color: #bfa64b;
     text-align: center;
-    font-size: 2.25em;
-    padding: 20px 10px;
-    background-color: rgb(37, 37, 245);
-    color: white;
+    font-size: 4em;  
+    font-weight: bold;
+    padding: 40px 20px;         
+    background-color: #3d5afe;
     width: 100%;
+    margin: auto;
+    border-radius: 20px 20px 20px 20px;
+    letter-spacing: 2px;     
 }
 
 .my_button_container {
     display: flex;
-    gap: 1em;
+    gap: 2em;  
     justify-content: center;
-    margin-top: 20px;
     flex-wrap: wrap;
+    width: 100%;
+    margin-top: 120px;
 }
 
-.my_button {
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.1em;
-    cursor: pointer;
-    border-radius: 5px;
-    flex: 1 1 100px;
-    transition: background 0.3s ease
+.title_center, .my_button_container {
+    box-sizing: border-box;
 }
+
+
+.my_button {
+    background-color: rgb(142, 202, 230);
+    border: none;
+    padding: 40px 60px;           
+    font-size: 2.5em; 
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 999px;
+    flex: 1 1 350px; 
+    min-width: 220px;
+    margin: 0 10px;
+    transition: background 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
+}
+
 .my_button_1 {
     background-color: rgb(142, 202, 230);
+    color: #bfa64b;
+    border: none;
+    padding: 40px 60px;           
+    font-size: 2.5em; 
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 999px;
+    flex: 1 1 350px; 
+    min-width: 220px;
+    margin: 0 10px;
+    transition: background 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+
 }
 .my_button_2 {
-    color: rgb(33, 158, 188);
+    background-color: rgb(33, 158, 188);
+    color: #bfa64b;
+    border: none;
+    padding: 40px 60px;           
+    font-size: 2.5em; 
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 999px;
+    flex: 1 1 350px; 
+    min-width: 220px;
+    margin: 0 10px;
+    transition: background 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 .my_button_3 {
-    color: 	rgb(2, 48, 71);
+    background-color: 	rgb(2, 48, 71);
+    color: #bfa64b;
+    border: none;
+    padding: 40px 60px;           
+    font-size: 2.5em; 
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 999px;
+    flex: 1 1 350px; 
+    min-width: 220px;
+    margin: 0 10px;
+    transition: background 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 .my_button_1:hover, .my_button_2:hover, .my_button_3:hover {
     color: gray;
+    background-color: #dbeafe;
 }
