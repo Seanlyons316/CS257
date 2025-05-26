@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #d6e5f0;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /* I used chatgpt for this mainwrapper code here and where to place it in my HTML */
