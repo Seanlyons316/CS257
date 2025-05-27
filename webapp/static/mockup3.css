@@ -3,44 +3,107 @@ body {
     padding: 10px;
     height: 100%;
     /* text-align: center; */
+    margin: 0 0 0 245px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 html {
     height: 100%;
 }
 
-table, td, th {
-    border: 1px solid black;
+/* table styling stuff below */
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-top: 20px;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
 }
 
 .mainwrapper {  
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 
-ul.horizontal-navbar {
+ul.sidenav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #f1f1f1;
+    /* overflow: hidden; */
+    width: 230px;
+    background-color: #023047;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    box-sizing: border-box;
+    padding-top: 20px;
+    
 }
 
-ul.horizontal-navbar li {
-    float: left;
+ul.sidenav li {
+    /* float: left; */
+    margin-bottom: 5px;
 }
 
-ul.horizontal-navbar li a {
-    display: block;
-    color: black;
+ul.sidenav li a {
+    display: inline-block;    
+    color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    background-color: #3498db;
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin: 5px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
-ul.horizontal-navbar li a:hover {
-    background-color: #555;
+
+ul.sidenav li a:hover {
+    background-color: #2980b9;
     color: white;
+}
+
+
+.sidenav a:hover {
+    color:  #8ecae6;
+}
+
+a {
+    font-family: 'Courier New', Courier, monospace;
+    text-decoration: none;
+    color: #023047;
+    padding-left: 10px;
+}
+
+.bwhite {
+    color: white;
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.blue {
+    color: #219ebc;
 }
