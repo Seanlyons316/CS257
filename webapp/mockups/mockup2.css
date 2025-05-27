@@ -66,13 +66,14 @@ p {
   text-decoration: none;
   text-align: left;
   border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
 }
   
 
 /* is not needed: */
-/* .sidenav a:hover {
+.sidenav a:hover {
     color:  #8ecae6;
-} */
+}
 
 .dropdown {
     position: relative;
@@ -104,7 +105,7 @@ p {
 .dropdown-content {
     display: none;
     position: absolute;
-    left: 0; 
+    right: -10px;
     background-color: #3498db;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -160,3 +161,4 @@ tr:hover {
 .show { 
     display: block;
 }
+
