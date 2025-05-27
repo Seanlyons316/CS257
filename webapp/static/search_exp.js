@@ -88,6 +88,8 @@ function onTsunamisSearchChanged() {
     });
 }
 
+
+
 function onResetSearch() {
     let input = document.getElementById('tsunami_search_input');
     if (input) {
