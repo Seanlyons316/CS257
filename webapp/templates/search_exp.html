@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='search_exp.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='search_exp.js') }}" ></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <title>CS 257: Software Design</title>
+</head>
+<body>
+  <div class="main_wrapper">
+    <h1 class="title_center">TSUNAMI TRACKER MAIN MENU</h1>
+
+    <input type="text" id="tsunami_search_input" placeholder="Enter year...">
+    <button id="tsunami_search_button">Search</button>
+    <button id="tsunami_reset_button">Reset</button>
+
+    <div class="table_container">
+        <table id="tsunamis_table">
+            <thead>
+                <tr>
+                    <th>Source ID</th>
+                    <th>Wave ID</th>
+                    <th>Distance</th>
+                    <th>Travel Time (hrs)</th>
+                    <th>Validity</th>
+                    <th>Measurement</th>
+                    <th>Period</th>
+                    <th>First Motion</th>
+                    <th>Max Height</th>
+                    <th>Inundation</th>
+                    <th>Injuries</th>
+                    <th>Injuries Est.</th>
+                    <th>Fatalities</th>
+                    <th>Fatalities Est.</th>
+                    <th>Houses Damaged</th>
+                    <th>Houses Damaged Est.</th>
+                    <th>Houses Destroyed</th>
+                    <th>Houses Destroyed Est.</th>
+                    <th>Region</th>
+                    <th>Country</th>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Day</th>
+                    <th>State</th>
+                    <th>Location</th>
+                    <th>Lat</th>
+                    <th>Lon</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- JavaScript inserts rows here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
