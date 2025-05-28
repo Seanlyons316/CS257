@@ -1,15 +1,36 @@
+/* base stuff */
 body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    background-color: #d6e5f0;
-    /* background-color: white; */
     font-family: 'Courier New', Courier, monospace;
+    color: #023047;
+    margin: 0 0 0 245px;
+    text-align: center;
+    background-color: #d6e5f0;
 }
 
-/* I used chatgpt for this mainwrapper code here and where to place it in my HTML */
+header {
+    padding: 20px;
+    text-align: center;
+}
+  
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #023047;
+}
+
+a {
+    text-decoration: none;
+    color: #023047;
+    padding-left: 10px;
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+/* I used chatgpt for this mainwrapper code here and where to place it in my HTML
 .main_wrapper {
     color: white;
     width: 90vw;
@@ -45,86 +66,16 @@ body {
 
 .title_center, .my_button_container {
     box-sizing: border-box;
-}
+} */
 
-/* 
+
+
 .my_button {
-    background-color: rgb(142, 202, 230);
-    border: none;
-    padding: 40px 60px;           
-    font-size: 2.5em; 
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 999px;
-    flex: 1 1 350px; 
-    min-width: 220px;
-    margin: 0 10px;
-    transition: background 0.3s;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-
-}
-
-.my_button_1 {
-    background-color: rgb(142, 202, 230);
-    color: white;
-    border: none;
-    padding: 40px 60px;           
-    font-size: 2.5em; 
-    cursor: pointer;
-    border-radius: 999px;
-    flex: 1 1 350px; 
-    min-width: 220px;
-    margin: 0 10px;
-    transition: background 0.3s;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    font-family: 'Courier New', Courier, monospace;
-
-}
-.my_button_2 {
-    background-color: rgb(33, 158, 188);
-    color: white;
-    border: none;
-    padding: 40px 60px;           
-    font-size: 2.5em; 
-    cursor: pointer;
-    border-radius: 999px;
-    flex: 1 1 350px; 
-    min-width: 220px;
-    margin: 0 10px;
-    transition: background 0.3s;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    font-family: 'Courier New', Courier, monospace;
-}
-.my_button_3 {
-    background-color: 	rgb(2, 48, 71);
-    color: white;
-    border: none;
-    padding: 40px 60px;           
-    font-size: 2.5em; 
-    cursor: pointer;
-    border-radius: 999px;
-    flex: 1 1 350px; 
-    min-width: 220px;
-    margin: 0 10px;
-    transition: background 0.3s;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    font-family: 'Courier New', Courier, monospace;
-}
-.my_button_1:hover, .my_button_2:hover, .my_button_3:hover {
-    color: gray;
-    background-color: #dbeafe;
-}
-*/
-
-.my_button,
-.my_button_1,
-.my_button_2,
-.my_button_3 {
   display: inline-block;
   background-color: #3498db;
   color: white;
   padding: 20px 20px;
-  font-size: 32px;
+  font-size: 24px;
   border: none;
   cursor: pointer;
   border-radius: 4px;
@@ -141,3 +92,333 @@ body {
   background-color: #2980b9;
   color: white;
 }
+
+
+/* layout */
+
+.bigger {
+    font-size: 24px;
+}
+.container {
+    display: flex;
+}
+
+.blue {
+    color: #219ebc;
+}
+
+.white {
+    color: white;
+}
+
+.sidenav { 
+    width: 230px;
+    height: 100%;
+    /* min-height:  300vh; */
+    background-color: #023047;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    position: fixed;
+    box-sizing: border-box;
+}
+
+.bigger {
+    font-size: 24px;
+}
+.container {
+    display: flex;
+}
+
+.blue {
+    color: #219ebc;
+}
+
+.white {
+    color: white;
+}
+
+.sidenav { 
+    width: 230px;
+    height: 100%;
+    /* min-height:  300vh; */
+    background-color: #023047;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    position: fixed;
+    box-sizing: border-box;
+}
+  
+.sidenav .dropbtn {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 5px 15px;
+  padding: 10px;
+  text-decoration: none;
+  text-align: left;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+  
+
+/* is not needed: */
+.sidenav a:hover {
+    color:  #8ecae6;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.dropbtn:hover {
+    background-color: #2980b9;
+    color: white;
+}   
+
+.dropbtn a:hover {
+    background-color: #2980b9;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: -10px;
+    background-color: #3498db;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+    margin-left: 15px;
+}
+
+  
+.dropdown-content a {
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+    font-size: 16px;
+}
+  
+.dropdown-content a:hover {
+    background-color: #8ecae6;
+    color: white;
+}
+
+#high-btn,
+#low-btn {
+  display: inline-block;    
+  width: auto;              
+  white-space: normal;      
+  margin: 5px 15px;        
+}
+
+
+/* table styling stuff below */
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-top: 20px;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.show { 
+    display: block;
+}
+
+
+.main_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.title_center {
+    text-align: center;
+    font-size: 48pt;
+    padding: 20px;
+    background-color: rgb(37, 37, 245);
+    color: white;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: 500px;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.map-container {
+    position: relative;
+    width: 1200px;
+    height: 900px; 
+    margin: 0 auto;
+}
+
+.map-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 2px solid #333;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.marker {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.left-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    border-right: 2px solid #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.left-panel h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.left-panel form {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-panel label {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Had to consult Chatgpt a bit for the inputs here */
+.left-panel input[type="text"],
+.left-panel input[type="number"] {
+    padding: 2px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.left-panel input[type="submit"] {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #3498db;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+
+
+.left-panel input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+  
+.show { 
+    display: block;
+}
+
+.button {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 10px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 5px 15px 5px 15px;
+  white-space: normal;
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.button:hover {
+  background-color: #8ecae6;
+}
+
+.button {
+  background-color: #2980b9;
+  color: white;
+}
+
+.left-panel p,
+.sidenav form p {
+    margin-bottom: 2px;
+}
+
+.smaller {
+    font-size: 14px;
+}
+
+.description {
+    font-size: 22px;
+    color: #023047;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.space {
+    display: block;
+    margin-bottom: 10px;
+}
+  
+
