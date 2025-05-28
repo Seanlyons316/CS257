@@ -1,10 +1,197 @@
+/* base */
 body {
-    margin: 10px;
-    padding: 0px;
-    height: 100%;
-    font-family: sans-serif;
-    /* text-indent: 15%; removed */
+    font-family: 'Courier New', Courier, monospace;
+    color: #023047;
+    margin: 0 0 0 245px;
+    text-align: center;
+    background-color: #d6e5f0;
 }
+
+header {
+    padding: 20px;
+    text-align: center;
+}
+  
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #023047;
+}
+
+a {
+    text-decoration: none;
+    color: #023047;
+    padding-left: 10px;
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    padding-left: 15px;
+
+}
+   
+
+/* layout */
+
+.bigger {
+    font-size: 24px;
+}
+.container {
+    display: flex;
+}
+
+.blue {
+    color: #219ebc;
+}
+
+.white {
+    color: white;
+}
+
+.sidenav { 
+    width: 230px;
+    height: 100%;
+    /* min-height:  300vh; */
+    background-color: #023047;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    position: fixed;
+    box-sizing: border-box;
+}
+
+.bigger {
+    font-size: 24px;
+}
+.container {
+    display: flex;
+}
+
+.blue {
+    color: #219ebc;
+}
+
+.white {
+    color: white;
+}
+
+.sidenav { 
+    width: 230px;
+    height: 100%;
+    /* min-height:  300vh; */
+    background-color: #023047;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    position: fixed;
+    box-sizing: border-box;
+}
+  
+.sidenav .dropbtn {
+  display: block;
+  width: calc(100% - 30px);
+  margin: 5px 15px;
+  padding: 10px;
+  text-decoration: none;
+  text-align: left;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+}
+  
+
+/* is not needed: */
+.sidenav a:hover {
+    color:  #8ecae6;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+  
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-left: 15px;
+}
+
+.dropbtn:hover {
+    background-color: #2980b9;
+    color: white;
+}   
+
+.dropbtn a:hover {
+    background-color: #2980b9;
+    color: white;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: -10px;
+    background-color: #3498db;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+    margin-left: 15px;
+}
+
+  
+.dropdown-content a {
+    color: white;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: 4px;
+    font-size: 16px;
+}
+  
+.dropdown-content a:hover {
+    background-color: #8ecae6;
+    color: white;
+}
+
+#high-btn,
+#low-btn {
+  display: inline-block;    
+  width: auto;              
+  white-space: normal;      
+  margin: 5px 15px;        
+}
+
+
+/* table styling stuff below */
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-top: 20px;
+    margin: 20px auto;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.show { 
+    display: block;
+}
+
 
 .main_wrapper {
     display: flex;
@@ -97,7 +284,7 @@ body {
 /* Had to consult Chatgpt a bit for the inputs here */
 .left-panel input[type="text"],
 .left-panel input[type="number"] {
-    padding: 8px;
+    padding: 2px;
     margin-top: 5px;
     font-size: 14px;
 }
@@ -115,7 +302,6 @@ body {
 
 
 
-
 .left-panel input[type="submit"]:hover {
     background-color: #2980b9;
 }
@@ -124,3 +310,37 @@ body {
 .show { 
     display: block;
 }
+
+.button {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 10px;
+  font-size: 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 5px 15px 5px 15px;
+  white-space: normal;
+  text-decoration: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.button:hover {
+  background-color: #8ecae6;
+}
+
+.button {
+  background-color: #2980b9;
+  color: white;
+}
+
+.left-panel p,
+.sidenav form p {
+    margin-bottom: 2px;
+}
+
+.smaller {
+    font-size: 14px;
+}
+
