@@ -2,10 +2,30 @@
 window.addEventListener("load", initialize);
 
 function initialize() {
-  const element = document.getElementById("tsunami_search_button");
-  const resetElement = document.getElementById("tsunami_reset_button");
-  if (element) element.onclick = onTsunamisSearchFlexible;
-  if (resetElement) resetElement.onclick = onResetSearch;
+  document.getElementById("tsunami_search_button").onclick = onTsunamisSearchFlexible;
+  document.getElementById("tsunami_reset_button").onclick = onResetSearch;
+
+  document.querySelectorAll("#tsunami_search_criteria_dropdown a").forEach(function(el) {
+    el.onclick = function(e) {
+      e.preventDefault();
+      document.getElementById("tsunami_search_criteria").value = el.dataset.value;
+      document.getElementById("tsunami_search_criteria_button").textContent = el.textContent;
+    };
+});
+  document.querySelectorAll("#tsunami_sort_criteria_dropdown a").forEach(function(el) {
+    el.onclick = function(e){
+      e.preventDefault();
+      document.getElementById("tsunami_sort_criteria").value = el.dataset.value;
+      document.getElementById("tsunami_sort_criteria_button").textContent = el.textContent;
+    };
+});
+  document.querySelectorAll("#tsunami_order_criteria_dropdown a").forEach(function(el) {
+    el.onclick = function(e) {
+      e.preventDefault();
+      document.getElementById("tsunami_order_criteria").value = el.dataset.value;
+      document.getElementById("tsunami_order_criteria_button").textContent = el.textContent;
+    };
+  });
 }
 
 function getAPIBaseURL() {
@@ -19,21 +39,17 @@ function getAPIBaseURL() {
   );
 }
 
-function onTsunamisSearchFlexible() {
-  const searchEl = document.getElementById("tsunami_search_criteria");
-  const orderField = document.getElementById("tsunami_order_criteria");
-  const orderDir = document.getElementById("tsunami_order_direction");
-  const input = document.getElementById("tsunami_search_input");
-  if (!searchEl || !input) return;
 
-  const crit = searchEl.value;
-  const value = input.value.trim();
+function onTsunamisSearchFlexible() {
+  var crit = document.getElementById("tsunami_search_criteria").value;
+  const orderDir = document.getElementById("tsunami_order_direction");
+  var value = document.getElementById("tsunami_search_input").value.trim();
   let url = getAPIBaseURL() + "/tsunamis/";
 
   switch (crit) {
     case "year":
-      if (!value) return;
-      const year = parseInt(value, 10);
+      if (isNaN(value)) return;
+      var year = parseInt(value, 10);
       if (isNaN(year)) return;
       url += `years?start_year=${year}&end_year=${year + 1}`;
       break;
@@ -52,20 +68,16 @@ function onTsunamisSearchFlexible() {
   }
 
   fetch(url)
-    .then((r) => r.json())
-    .then((tsunamis) => {
-      // sort
-      const field = orderField ? orderField.value : "";
-      const dir = orderDir && orderDir.value === "desc" ? -1 : 1;
-      tsunamis.sort((a, b) => {
-        const va = a[field],
-          vb = b[field];
-        const na = parseFloat(va),
-          nb = parseFloat(vb);
-        if (!isNaN(na) && !isNaN(nb)) {
-          return (na - nb) * dir;
-        }
-        return va.toString().localeCompare(vb.toString()) * dir;
+    .then(function(r) { return r.json(); })
+    .then(function(tsunamis) {
+      var field = document.getElementById("tsunami_sort_criteria").value;
+      var dir = document.getElementById("tsunami_order_direction").value === "desc" ? -1 : 1;
+      tsunamis.sort(function(a, b) {
+        var va = parseFloat(a[field]);
+        var vb = parseFloat(b[field]);
+        if (va < vb) return -1 * dir;
+        if (va > vb) return 1 * dir;
+        return 0;
       });
 
       // build rows
@@ -103,7 +115,7 @@ function onTsunamisSearchFlexible() {
           "</tr>";
       }
 
-      const tbody = document.querySelector("#tsunamis_table tbody");
+      var tbody = document.querySelector("#tsunamis_table tbody");
       if (tbody) tbody.innerHTML = rows;
     })
     .catch(console.error);
