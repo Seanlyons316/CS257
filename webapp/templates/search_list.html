@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,18 +10,9 @@
   <body>
     <header>
       <h1 class="blue">Tsunami Archive Search</h1>
-      <p>Search for a tsunami by specific year, location, country name, or ID</p>
-      <form onsubmit="event.preventDefault(); onTsunamisSearchFlexible();">
-        <input
-          type="text"
-          id="tsunami_search_input"
-          placeholder="Enter year / country / ID…"
-        />
-      <button type="submit" id="tsunami_search_button">Search</button>
-      <button type="button" id="tsunami_reset_button" onclick="onTsunamisReset()">Reset</button>
-      </form>
-
-      <p>Select the tsunami you’re interested in:</p>
+      <p>Search for a tsunami by specific year, location, country name, or ID using the sidebar</p>
+    </header>
+    <div class="container">
       <table id="tsunamis_table" cellspacing="0" cellpadding="5">
         <thead>
           <tr>
@@ -55,42 +45,35 @@
             <th>Longitude</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Results will be populated here by JavaScript -->
-        </tbody>
+        <tbody></tbody>
       </table>
-    </header>
-
-    <div class="container">
       <div class="sidenav">
         <a href="homepage.html" class="white bigger">TsunamiArchive</a>
-        <p class="blue">Search by:</p>
-        <select id="tsunami_search_criteria">
-          <option value="year">Year</option>
-          <option value="country">Country</option>
-          <option value="wave id">Wave ID</option>
-        </select>
-
+        <form onsubmit="event.preventDefault(); onTsunamisSearchFlexible();">
+          <input type="text" id="tsunami_search_input" placeholder="Enter year / country / ID…"/>
+          <button type="submit" id="tsunami_search_button">Search</button>
+          <button type="button" id="tsunami_reset_button">Reset</button>
+        </form>
+        <button id="tsunami_search_criteria_button" class="dropbtn">Search Criteria</button>
+        <div id="tsunami_search_criteria_dropdown" class="dropdown-content">
+          <a href="#" data-value="year">Year</a>
+          <a href="#" data-value="country">Country</a>
+          <a href="#" data-value="wave id">Wave ID</a>
+        </div>
         <p class="blue">Sort by:</p>
-        <select id="tsunami_order_criteria">
-          <option value="distance from source">Distance from Source</option>
-          <option value="travel time_hours">Travel Time Hours</option>
-          <option value="validity">Validity</option>
-          <option value="measurement type">Measurement Type</option>
-          <option value="wave period">Wave Period</option>
-          <option value="first motion">First Motion</option>
-          <option value="max_height">Max Height</option>
-          <option value="horizonrtal innundation">Horizontal Inundation</option>
-          <option value="injuries">Injuries</option>
-          <option value="fatalities">Fatalities</option>
-          <option value="houses damaged">Houses Damaged</option>
-          <option value="houses destroyed">Houses Destroyed</option>
-        </select>
-        <select id="tsunami_order_direction">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+        <button id="tsunami_sort_criteria_button" class="dropbtn">Sort Criteria</button>
+        <div id="tsunami_sort_criteria_dropdown" class="dropdown-content">
+          <a href="#" data-value="distance from source">Distance</a>
+          <a href="#" data-value="travel time_hours">Travel Time</a>
+          <a href="#" data-value="fatalities">Fatalities</a>
+        </div>
+        <button id="tsunami_order_criteria_button" class="dropbtn">Order</button>
+        <div id="tsunami_order_criteria_dropdown" class="dropdown-content">
+          <a href="#" data-value="asc">Ascending</a>
+          <a href="#" data-value="desc">Descending</a>
+        </div>
       </div>
     </div>
   </body>
 </html>
+

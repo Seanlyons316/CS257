@@ -41,7 +41,7 @@ function onTsunamisSearchFlexible() {
       if (!value) return;
       url += `countries?country=${encodeURIComponent(value)}`;
       break;
-    case "id":
+    case "wave id":
       if (!value) return;
       const id = parseInt(value, 10);
       if (isNaN(id)) return;
@@ -115,23 +115,34 @@ function onResetSearch() {
   const tbody = document.querySelector("#tsunamis_table tbody");
   if (tbody) tbody.innerHTML = "";
 }
-document.getElementById('measurements-btn').addEventListener('click', function(event) {
+
+document.getElementById('tsunami_search_criteria_button').addEventListener('click', function(event) {
     event.stopPropagation();
     // document.getElementById('years-menu').classList.remove('show');
-    document.getElementById('damages-menu').classList.remove('show');
-    document.getElementById('measurements-menu').classList.toggle('show');
+    document.getElementById('tsunami_sort_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_order_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_search_criteria_dropdown').classList.toggle('show');
 });
 
-document.getElementById('damages-btn').addEventListener('click', function(event) {
+document.getElementById('tsunami_order_criteria_button').addEventListener('click', function(event) {
     event.stopPropagation();
     // document.getElementById('years-menu').classList.remove('show');
-    document.getElementById('measurements-menu').classList.remove('show');
-    document.getElementById('damages-menu').classList.toggle('show');
+    document.getElementById('tsunami_sort_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_order_criteria_dropdown').classList.toggle('show');
+    document.getElementById('tsunami_search_criteria_dropdown').classList.remove('show');
+});
+
+document.getElementById('tsunami_sort_criteria_button').addEventListener('click', function(event) {
+    event.stopPropagation();
+    // document.getElementById('years-menu').classList.remove('show');
+    document.getElementById('tsunami_order_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_search_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_sort_criteria_dropdown').classList.toggle('show');
 });
 
 // click anywhere else to close the dropdowns
 window.addEventListener('click', function() {
-    // document.getElementById('years-menu').classList.remove('show');
-    document.getElementById('measurements-menu').classList.remove('show');
-    document.getElementById('damages-menu').classList.remove('show');
+    document.getElementById('tsunami_order_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_search_criteria_dropdown').classList.remove('show');
+    document.getElementById('tsunami_sort_criteria_dropdown').classList.remove('show');
 });
