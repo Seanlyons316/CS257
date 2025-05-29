@@ -44,7 +44,9 @@ function getAPIBaseURL() {
   );
 }
 
-
+function getTsunamiInfo(waveId) {
+  
+}
 function onTsunamisSearchFlexible() {
   // Get the search criteria, input value, and sets the base URL for the API call
   var crit = document.getElementById("tsunami_search_criteria").value;
@@ -92,7 +94,7 @@ function onTsunamisSearchFlexible() {
       // Create the table header
       for (const t of tsunamis) {
         rows +=
-          "<tr>" +
+          `<tr class="tsunami-row" data-waveid="{t["wave id"]}">` +
           `<td>${t["source id"]}</td>` +
           `<td>${t["wave id"]}</td>` +
           `<td>${t["distance from source"]}</td>` +
@@ -123,15 +125,27 @@ function onTsunamisSearchFlexible() {
           "</tr>";
       }
       // Insert the new rows into the table body
-      var tbody = document.querySelector("#tsunamis_table tbody");
+      const tbody = document.querySelector("#tsunamis_table tbody");
       if (tbody) tbody.innerHTML = rows;
     })
+
+    // Had to look up how to store the wave id stuff here before doing window.location.href = 'tsunami_info.html'
+    Array.from(tbody.getElementByClassName('tsunami-row')).forEach(row => {
+      row.addEventListener('click', function(){
+        const waveId = this.dataset.waveid;
+        sessionStorage.setItem('selectedWaveId', waveId)
+        window.location.href = 'tsunami_info.html'
+      })
+    })
+
+    // Clickable rows to load tsunami_info for that specific tsunami
+    
     .catch(console.error);
 }
 // Function to reset the search input and clear the table
 function onResetSearch() {
-  const input = document.getElementById("tsunami_search_input");
-  if (input) input.value = "";
+  var value = document.getElementById("tsunami_search_input");
+  if (input) value.value = "";
   const tbody = document.querySelector("#tsunamis_table tbody");
   if (tbody) tbody.innerHTML = "";
 }
