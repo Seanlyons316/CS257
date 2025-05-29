@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/tsunami_info.css" type="text/css" />
-    <title>Seach Result</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tsunami Info</title>
+  <link rel="stylesheet" href="/static/tsunami_info.css">
+  <script src="/static/tsunami_info.js" defer></script>
 </head>
 
 <body>
-    <div class="mainwrapper">
-
-    <ul class="sidenav">    
-        <a href="#home" class="bwhite">TsunamiArchive</a>
-        <li><a href="#back">Back</a></li>
-        <li><a href="#search">Search</a></li>
+  <div class="mainwrapper">
+    <ul class="sidenav">
+      <li><a href="/" class="bwhite">TsunamiArchive</a></li>
+      <li><a href="/search" class="bwhite">Search</a></li>
     </ul>
-    <h1 class="blue">Tsunami/Wave Info Table</h1>
-    <table id = "tsunami_info_table">
+
+    <h1 class="blue">Tsunami/Wave Info</h1>
+    <table id="tsunami_info_table">
+      <tbody id="tsunami_table_body">
+      </tbody>
     </table>
-
-    </div>
-
+  </div>
 </body>
 </html>

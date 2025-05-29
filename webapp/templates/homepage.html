@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Tsunami Tracker</title>
-    <link rel="stylesheet" href="../static/homepage.css" />
-    <script src="../static/homepage.js"></script>
-    <link rel="shortcut icon" href="../static/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Tsunami Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='homepage.css') }}" />
+  <script src="{{ url_for('static', filename='homepage.js') }}"></script>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
   <body>
   <header>
     <h1 class="blue">TsunamiArchive</h1>
@@ -19,12 +19,15 @@
       or switch to the <a href="webapp/templates/search_list.html"><strong>list view</strong></a> for detailed filtering and sorting options. 
       Discover patterns, analyze impact data, and gain insights into some of the most powerful forces of nature.
     </p>
-    
     <div class="sidenav">
-      <a href="homepage.html" class="white bigger space">TsunamiArchive</a> 
+      <a class="white bigger">TsunamiArchive</a>
       <div class = "my_button_container">
-        <button class="my_button" id = "tsunami_search_button" onclick = "SendtoPage('webapp/templates/search_list.html')">Search By List</button>
-        <button class="my_button" id = "world_map" onclick = "SendtoPage('webapp/templates/world_map.html')">Search By Map</button>
+<a href="{{ url_for('search_list') }}">
+    <button class="my_button" id="tsunami_search_button">Search By List</button>
+</a>
+<a href="{{ url_for('world_map') }}">
+    <button class="my_button" id="world_map">Search By Map</button>
+</a>
       </div>
     </div>
   </body>

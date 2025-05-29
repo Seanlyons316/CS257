@@ -15,18 +15,27 @@
             <p>tsunami_info - result of a search</p>
             <p>world_map - map search</p>
 
-        <ul>
-            <li><a href="homepage.html" target="_blank" rel="noopener noreferrer">homepage.html</a>,
-                <a href="../static/homepage.css" target="_blank" rel="noopener noreferrer">homepage.css</a>,
-            <li><a href="search_list.html" target="_blank" rel="noopener noreferrer">search_list.html</a>,
-                <a href="../static/search_list.css" target="_blank" rel="noopener noreferrer">search_list.css</a>,
-                <a href="../static/search_list.js" target="_blank" rel="noopener noreferrer">search_list.js</a></li>
-            <li><a href="tsunami_info.html" target="_blank" rel="noopener noreferrer">tsunami_info.html</a>,
-                <a href="../static/tsunami_info.css" target="_blank" rel="noopener noreferrer">tsunami_info.css</a>,
-                <a href="../static/tsunami_info.js" target="_blank" rel="noopener noreferrer">tsunami_info.js</a></li>
-            <li><a href="world_map.html" target="_blank" rel="noopener noreferrer">world_map.html</a>,
-                <a href="../static/world_map.css" target="_blank" rel="noopener noreferrer">world_map.css</a>,
-                <a href="../static/world_map.js" target="_blank" rel="noopener noreferrer">world_map.js</a></li>
-        </ul>
+<ul>
+    <li>
+        <a href="{{ url_for('homepage') }}" target="_blank">homepage.html</a>,
+        <a href="{{ url_for('static', filename='homepage.css') }}" target="_blank">homepage.css</a>
+    </li>
+    <li>
+        <a href="{{ url_for('search_list') }}" target="_blank">search_list.html</a>,
+        <a href="{{ url_for('static', filename='search_list.css') }}" target="_blank">search_list.css</a>,
+        <a href="{{ url_for('static', filename='search_list.js') }}" target="_blank">search_list.js</a>
+    </li>
+    <li>
+        <a href="{{ url_for('tsunami_info') }}" target="_blank">tsunami_info.html</a>,
+        <a href="{{ url_for('static', filename='tsunami_info.css') }}" target="_blank">tsunami_info.css</a>,
+        <a href="{{ url_for('static', filename='tsunami_info.js') }}" target="_blank">tsunami_info.js</a>
+    </li>
+    <li>
+        <a href="{{ url_for('world_map') }}" target="_blank">world_map.html</a>,
+        <a href="{{ url_for('static', filename='world_map.css') }}" target="_blank">world_map.css</a>,
+        <a href="{{ url_for('static', filename='world_map.js') }}" target="_blank">world_map.js</a>
+    </li>
+</ul>
+
     </body>
 </html>

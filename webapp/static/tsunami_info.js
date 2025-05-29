@@ -1,7 +1,7 @@
-window.addEventListener("load", initalize);
+window.addEventListener("load", initialize);
 
-function initalize() {
-    const waveId = sessionStorage.getItem('selectedWaveId');
+function initialize() {
+    const waveId = getWaveIdFromQuery();
     if (!waveId) {
         alert("Why are you here. There is no tsunami selected!");
         return;
@@ -9,17 +9,26 @@ function initalize() {
     getTsunamiInfo(waveId);
 }
 
+function getWaveIdFromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('wave_id');
+}
+
 function getTsunamiInfo(waveId) {
     const url = getAPIBaseURL() + "tsunamis/id?id=" + encodeURIComponent(waveId);
     fetch(url)
         .then(function(r) {return r.json()})
         .then(function(tsunami) {
+            print(tsunami)
+            if (Array.isArray(tsunami)) tsunami = tsunami[0];
             fillTsunamiTable(tsunami);
         })
         .catch(console.error);
 }
 
+
 function fillTsunamiTable(tsunami) {
+    console.log("Tsunami data received:", tsunami);
     const table = document.getElementById("tsunami_table_body");
     if (!table) return;
 
@@ -38,7 +47,6 @@ function fillTsunamiTable(tsunami) {
         ["Day", "wave day"],
         ["Distance from Source", "distance from source"],
         ["Travel Time (Hours)", "travel time_hours"],
-        ["Travel Time (Minutes)", "travel time_minutes"],
         ["Validity", "validity"],
         ["Measurement Type", "measurement type"],
         ["Period", "wave period"],
@@ -49,14 +57,13 @@ function fillTsunamiTable(tsunami) {
         ["Injuries Estimate", "injury estimate"],
         ["Fatalities", "fatalities"],
         ["Fatality Estimate", "fatality estimate"],
-        ["Damage Millions USD", "damage_millions_usd"],
-        ["Damage Millions Estimate", "damage_millions_estimate"],
         ["Houses Damaged", "houses damaged"],
         ["Houses Damaged Estimate", "houses damaged estimate"],
         ["Houses Destroyed", "houses destroyed"],
         ["Houses Destroyed Estimate", "houses destroyed estimate"]
     ];
-
+    console.log("tsunami object keys:", Object.keys(tsunami));
+    console.log("tsunami object:", tsunami);
     fields.forEach(([label, key]) => {
         let value = tsunami[key];
         if (value === undefined || value === null) value = "—";
@@ -74,7 +81,7 @@ function getAPIBaseURL() {
     window.location.hostname +
     ":" +
     window.location.port +
-    "/api"
+    "/api/"
   );
 }
 

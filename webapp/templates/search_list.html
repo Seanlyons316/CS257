@@ -1,95 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/search_list.css" type="text/css" />
-    <title>Tsunami Archive Search</title>
-    <script src="../static/search_list.js" defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>Tsunami Archive Search</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='search_list.css') }}" type="text/css" />
+  <script src="{{ url_for('static', filename='search_list.js') }}" defer></script>
+</head>
 
-  <body>
-    <header>
-      <h1 class="blue">Tsunami Archive Search</h1>
-      <p>Search for a tsunami by specific year, location, country name, or ID using the sidebar</p>
-    </header>
-    <div class="container">
-      <table id="tsunamis_table" cellspacing="0" cellpadding="5">
-        <thead>
-          <tr>
-            <th>Source ID</th>
-            <th>Wave ID</th>
-            <th>Distance</th>
-            <th>Travel Time (hours)</th>
-            <th>Validity</th>
-            <th>Measurement Type</th>
-            <th>Wave Period</th>
-            <th>First Motion</th>
-            <th>Max Height</th>
-            <th>Horizontal Inundation</th>
-            <th>Injuries</th>
-            <th>Injuries Est.</th>
-            <th>Fatalities</th>
-            <th>Fatal. Est.</th>
-            <th>Houses Damaged</th>
-            <th>Houses Dam. Est.</th>
-            <th>Houses Destroyed</th>
-            <th>Houses Dest. Est.</th>
-            <th>Region Code</th>
-            <th>Country</th>
-            <th>Year</th>
-            <th>Month</th>
-            <th>Day</th>
-            <th>State</th>
-            <th>Location</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-      <div class="sidenav">
-        <a href="homepage.html" class="white bigger">TsunamiArchive</a>
-        <p class="blue">Search by:</p>
-        <button id="tsunami_search_criteria_button" class="dropbtn">Criteria >> </button>
-        <div id="tsunami_search_criteria_dropdown" class="dropdown-content">
-          <a href="#" data-value="year">Year</a>
-          <a href="#" data-value="country">Country</a>
-          <a href="#" data-value="wave id">Wave ID</a>
-        </div>
+<body>
+  <header>
+    <h1 class="blue">Tsunami Archive Search</h1>
+    <p>Search for a tsunami by specific year, location, country name, or ID using the sidebar</p>
+  </header>
+
+  <div class="container">
+    <table id="tsunamis_table" cellspacing="0" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Source ID</th>
+          <th>Wave ID</th>
+          <th>Distance</th>
+          <th>Travel Time (hours)</th>
+          <th>Validity</th>
+          <th>Measurement Type</th>
+          <th>Wave Period</th>
+          <th>First Motion</th>
+          <th>Max Height</th>
+          <th>Horizontal Inundation</th>
+          <th>Injuries</th>
+          <th>Injuries Est.</th>
+          <th>Fatalities</th>
+          <th>Fatal. Est.</th>
+          <th>Houses Damaged</th>
+          <th>Houses Dam. Est.</th>
+          <th>Houses Destroyed</th>
+          <th>Houses Dest. Est.</th>
+          <th>Region Code</th>
+          <th>Country</th>
+          <th>Year</th>
+          <th>Month</th>
+          <th>Day</th>
+          <th>State</th>
+          <th>Location</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="sidenav">
+      <a href="{{ url_for('homepage') }}" class="white bigger">TsunamiArchive</a>
+
+      <p class="blue">Search by:</p>
+      <button id="tsunami_search_criteria_button" class="dropbtn">Criteria >></button>
+      <div id="tsunami_search_criteria_dropdown" class="dropdown-content">
+        <a href="#" data-value="year">Year</a>
+        <a href="#" data-value="country">Country</a>
+        <a href="#" data-value="wave id">Wave ID</a>
+      </div>
 
         <p class="blue">Search box:</p>
-        <form onsubmit="event.preventDefault(); onTsunamisSearchFlexible();">
-          <input type="text" id="tsunami_search_input" placeholder="Enter year/country/ID"/>
-          <!-- <button type="submit" id="tsunami_search_button">Search</button> -->
-          <!-- <button type="button" id ="tsunami_reset_button">Reset</button> -->
+        <div id="tsunami_search_controls">
+          <input type="text" id="tsunami_search_input" placeholder="Enter year/country/ID" />
 
-        <p class="blue">Sort by:</p>
-        <button id="tsunami_sort_criteria_button" class="dropbtn">Criteria >> </button>
-        <div id="tsunami_sort_criteria_dropdown" class="dropdown-content">
-          <a href="#" data-value="distance from source">Distance</a>
-          <a href="#" data-value="travel time_hours">Travel Time</a>
-          <a href="#" data-value="validity">Validity</a>
-          <a href="#" data-value="measurement type">Measurement Type</a>
-          <a href="#" data-value="wave period">Wave Period</a>
-          <a href="#" data-value="first motion">First Motion</a>
-          <a href="#" data-value="max_height">Max Height</a>
-          <a href="#" data-value="horizontal inundation">Horizontal Inundation</a>
-          <a href="#" data-value="injuries">Injuries</a>
-          <a href="#" data-value="fatalities">Fatalities</a>
-          <a href="#" data-value="houses damaged">Houses Damaged</a>
-          <a href="#" data-value="houses destroyed">Houses Destroyed</a>
+          <!-- Hidden inputs to track selected dropdown values -->
+          <input type="hidden" id="tsunami_search_criteria" value="year">
+          <input type="hidden" id="tsunami_sort_criteria" value="distance from source">
+          <input type="hidden" id="tsunami_order_criteria" value="asc">
+
+          <p class="blue">Sort by:</p>
+          <button id="tsunami_sort_criteria_button" class="dropbtn">Criteria >></button>
+          <div id="tsunami_sort_criteria_dropdown" class="dropdown-content">
+            <a href="#" data-value="distance from source">Distance</a>
+            <a href="#" data-value="travel time_hours">Travel Time</a>
+            <a href="#" data-value="validity">Validity</a>
+            <a href="#" data-value="measurement type">Measurement Type</a>
+            <a href="#" data-value="wave period">Wave Period</a>
+            <a href="#" data-value="first motion">First Motion</a>
+            <a href="#" data-value="max_height">Max Height</a>
+            <a href="#" data-value="horizontal inundation">Horizontal Inundation</a>
+            <a href="#" data-value="injuries">Injuries</a>
+            <a href="#" data-value="injury estimate">Injury Estimate</a>
+            <a href="#" data-value="fatalities">Fatalities</a>
+            <a href="#" data-value="fatality estimate">Fatality Estimate</a>
+            <a href="#" data-value="houses damaged">Houses Damaged</a>
+            <a href="#" data-value="houses damaged estimate">Houses Damaged Estimate</a>
+            <a href="#" data-value="houses destroyed">Houses Destroyed</a>
+            <a href="#" data-value="houses destroyed estimate">Houses Destroyed Estimate</a>
+            <a href="#" data-value="region code">Region Code</a>
+            <a href="#" data-value="wave year">Year</a>
+            <a href="#" data-value="wave month">Month</a>
+            <a href="#" data-value="wave day">Day</a>
+          </div>
+
+          <p class="blue">Order by:</p>
+          <button id="tsunami_order_criteria_button" class="dropbtn">Criteria >></button>
+          <div id="tsunami_order_criteria_dropdown" class="dropdown-content">
+            <a href="#" data-value="asc">Ascending</a>
+            <a href="#" data-value="desc">Descending</a>
+          </div>
+
+          <button class="button" type="button" id="tsunami_search_button">Search</button>
+          <button class="button" type="button" id="tsunami_reset_button">Reset</button>
         </div>
-        <p class="blue">Order by:</p>
-        <button id="tsunami_order_criteria_button" class="dropbtn">Criteria >></button>
-        <div id="tsunami_order_criteria_dropdown" class="dropdown-content">
-          <a href="#" data-value="asc">Ascending</a>
-          <a href="#" data-value="desc">Descending</a>
-        </div>
-        <button class="button" type="submit" id="tsunami_search_button">Search</button>
-        <button class="button" type="button" id="tsunami_reset_button">Reset</button>
-      </form>
-      </div>
+
     </div>
-  </body>
+  </div>
+</body>
 </html>
-

@@ -1,46 +1,62 @@
-CREATE TABLE tsunamis_attribute (
-   SOURCE_ID real NOT NULL,
-   WAVE_ID real NOT NULL,
-   DISTANCE_FROM_SOURCE real,
-   TRAVEL_TIME_HOURS real,
-   TRAVEL_TIME_MINUTES real,
-   VALIDITY text,
-   MEASUREMENT_TYPE real,
-   wave_PERIOD real,
-   FIRST_MOTION text,
-   MAXIMUM_HEIGHT real,
-   HORIZONRTAL_INNUNDATION real
-);
-CREATE TABLE tsunamis_destruction (
-   WAVE_ID real NOT NULL,
-   INJURIES real,
-   INJURY_ESTIMATE real,
-   FATALITIES real,
-   FATALITY_ESTIMATE real,
-   DAMAGE_MILLIONS_DOLLARS real,
-   DAMAGE_ESTIMATE real,
-   HOUSES_DAMAGED real,
-   HOUSE_DAMAGE_ESTIMATE real,
-   HOUSES_DESTROYED real,
-   HOUSE_DESTRUCTION_ESTIMATE real
+CREATE TABLE public.tsunamis_attribute (
+    wave_id real NOT NULL,
+    source_id real NOT NULL,
+    distance_from_source real,
+    travel_time_hours real,
+    travel_time_minutes real,
+    validity text,
+    measurement_type real,
+    wave_period real,
+    first_motion text,
+    maximum_height real,
+    horizonrtal_innundation real
 );
 
-CREATE TABLE tsunamis_place_time (
-   WAVE_ID real NOT NULL,
-   REGION_CODE real,
-   COUNTRY text,
-   wave_YEAR real NOT NULL,
-   wave_MONTH text,
-   wave_DAY real,
-   wave_STATE text,
-   wave_LOCATION text,
-   LATITUDE real,
-   LONGITUDE real
+
+--
+-- Name: tsunamis_destruction; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tsunamis_destruction (
+    wave_id real NOT NULL,
+    injuries real,
+    injury_estimate real,
+    fatalities real,
+    fatality_estimate real,
+    damage_millions_dollars real,
+    damage_estimate real,
+    houses_damaged real,
+    house_damage_estimate real,
+    houses_destroyed real,
+    house_destruction_estimate real
 );
 
-CREATE TABLE tsunamis_ids (
-   SOURCE_ID real NOT NULL,
-   WAVE_ID real NOT NULL
+
+--
+-- Name: tsunamis_ids; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tsunamis_ids (
+    source_id real NOT NULL,
+    wave_id real NOT NULL
+);
+
+
+--
+-- Name: tsunamis_place_time; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tsunamis_place_time (
+    wave_id real NOT NULL,
+    region_code real,
+    country text,
+    wave_year real NOT NULL,
+    wave_month text,
+    wave_day real,
+    wave_state text,
+    wave_location text,
+    latitude real,
+    longitude real
 );
 
 -- CREATE TABLE sources (

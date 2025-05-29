@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/world_map.css" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='world_map.css') }}" type="text/css" />
     <title>Map</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="sidenav"> 
-    <a href="homepage.html" class="white bigger">TsunamiArchive</a> 
+    <a href="{{ url_for('homepage') }}" class="white bigger">TsunamiArchive</a>
     <p class="blue">Filter Tsunamis:</p>
     <form action="/search" method="get">
         <p for="year" class="white smaller">Year:</p>

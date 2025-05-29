@@ -70,8 +70,8 @@ def get_tsunamis():
         LIMIT 10'''
         cursor.execute(query)
         for row in cursor:
-            tsunamis.append({'wave id': row[0],
-                            'source id': row[1],
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
                             'distance from source': row[2],
                             'travel time_hours': row[3],
                             'validity': row[4],
@@ -165,24 +165,25 @@ def get_tsunamis_by_country():
         return 'Please provide a country name.'
     try:
         query = '''SELECT ta.source_id, ta.WAVE_ID, ta.distance_from_source, ta.travel_time_hours,
-        ta.validity, ta.measurement_type, ta.wave_period, ta.first_motion,
-        ta.maximum_height, ta.horizonrtal_innundation,
-        td.injuries, td.injury_estimate, td.fatalities, td.fatality_estimate,
-        td.houses_damaged, td.house_damage_estimate,
-        td.houses_destroyed, td.house_destruction_estimate,
-        tp.region_code, tp.country, tp.wave_year, tp.wave_month, tp.wave_day,
-        tp.wave_state, tp.wave_location, tp.latitude, tp.longitude 
-        FROM tsunamis_attribute AS ta, tsunamis_destruction AS td, tsunamis_place_time AS tp
-        WHERE ta.WAVE_ID = td.WAVE_ID 
-        AND td.WAVE_ID = tp.WAVE_ID 
-        AND tp.country = %s
-        ORDER BY tp.wave_YEAR DESC'''
+       ta.validity, ta.measurement_type, ta.wave_period, ta.first_motion,
+       ta.maximum_height, ta.horizonrtal_innundation,
+       td.injuries, td.injury_estimate, td.fatalities, td.fatality_estimate,
+       td.houses_damaged, td.house_damage_estimate,
+       td.houses_destroyed, td.house_destruction_estimate,
+       tp.region_code, tp.country, tp.wave_year, tp.wave_month, tp.wave_day,
+       tp.wave_state, tp.wave_location, tp.latitude, tp.longitude 
+        FROM tsunamis_attribute AS ta
+        JOIN tsunamis_destruction AS td ON ta.WAVE_ID = td.WAVE_ID
+        JOIN tsunamis_place_time  AS tp ON ta.WAVE_ID = tp.WAVE_ID
+        WHERE tp.country = %s
+        ORDER BY tp.wave_year DESC;'''
+
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(query, parameters)
         for row in cursor:
-            tsunamis.append({'wave id': row[0],
-                            'source id': row[1],
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
                             'distance from source': row[2],
                             'travel time_hours': row[3],
                             'validity': row[4],
@@ -212,6 +213,7 @@ def get_tsunamis_by_country():
     except Exception as e:
         print(e, file=sys.stderr)
     connection.close()
+    print(tsunamis)
     return json.dumps(tsunamis, indent = 4)
 
 
@@ -219,6 +221,7 @@ def get_tsunamis_by_country():
 def get_tsunamis_by_wave_id():
     ''' Returns a list of all the tsunamis and all of their info by wave id. '''
     id = flask.request.args.get('id', type=int)
+    print(id)
     tsunamis = []
     parameters = []
     if id is not None:
@@ -242,8 +245,8 @@ def get_tsunamis_by_wave_id():
         cursor = connection.cursor()
         cursor.execute(query, parameters)
         for row in cursor:
-            tsunamis.append({'wave id': row[0],
-                            'source id': row[1],
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
                             'distance from source': row[2],
                             'travel time_hours': row[3],
                             'validity': row[4],
@@ -275,6 +278,7 @@ def get_tsunamis_by_wave_id():
         print(e, file=sys.stderr)
 
     connection.close()
+    print(tsunamis)
     return json.dumps(tsunamis, indent = 4)
 
 
@@ -312,17 +316,17 @@ def get_tsunamis_by_year_range():
        tp.region_code, tp.country, tp.wave_year, tp.wave_month, tp.wave_day,
        tp.wave_state, tp.wave_location, tp.latitude, tp.longitude 
         FROM tsunamis_attribute AS ta
-        JOIN tsunamis_destruction AS td ON ta.source_id = td.WAVE_ID
-        JOIN tsunamis_place_time AS tp ON ta.source_id = tp.WAVE_ID
-        WHERE CAST(tp.wave_YEAR AS FLOAT) BETWEEN %s AND %s 
-        ORDER BY tp.wave_YEAR DESC;'''
+        JOIN tsunamis_destruction AS td ON ta.WAVE_ID = td.WAVE_ID
+        JOIN tsunamis_place_time  AS tp ON ta.WAVE_ID = tp.WAVE_ID
+        WHERE tp.wave_year BETWEEN %s AND %s
+        ORDER BY tp.wave_year DESC;'''
 
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(query, parameters)
         for row in cursor:
-            tsunamis.append({'wave id': row[0],
-                            'source id': row[1],
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
                             'distance from source': row[2],
                             'travel time_hours': row[3],
                             'validity': row[4],
@@ -352,7 +356,7 @@ def get_tsunamis_by_year_range():
 
     except Exception as e:
         print(e, file=sys.stderr)
-
+    print(tsunamis)
     connection.close()
     return json.dumps(tsunamis[:100], indent = 4)
 
@@ -383,8 +387,8 @@ def get_tsunamis_by_country_and_year_range():
         cursor = connection.cursor()
         cursor.execute(query, (start_year, end_year, country))
         for row in cursor:
-            tsunamis.append({'wave id': row[0],
-                            'source id': row[1],
+            tsunamis.append({'source id': row[0],
+                            'wave id': row[1],
                             'distance from source': row[2],
                             'travel time_hours': row[3],
                             'validity': row[4],

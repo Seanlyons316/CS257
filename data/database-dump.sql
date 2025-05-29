@@ -29,8 +29,8 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.tsunamis_attribute (
-    source_id real NOT NULL,
     wave_id real NOT NULL,
+    source_id real NOT NULL,
     distance_from_source real,
     travel_time_hours real,
     travel_time_minutes real,
@@ -94,7 +94,7 @@ CREATE TABLE public.tsunamis_place_time (
 -- Data for Name: tsunamis_attribute; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.tsunamis_attribute (source_id, wave_id, distance_from_source, travel_time_hours, travel_time_minutes, validity, measurement_type, wave_period, first_motion, maximum_height, horizonrtal_innundation) FROM stdin;
+COPY public.tsunamis_attribute (wave_id, source_id, distance_from_source, travel_time_hours, travel_time_minutes, validity, measurement_type, wave_period, first_motion, maximum_height, horizonrtal_innundation) FROM stdin;
 11014	1	12	\N	\N	\N	1	\N	\N	\N	\N
 17601	3	935	\N	\N	\N	1	\N	\N	\N	\N
 1	3	106	\N	\N	\N	1	\N	\N	\N	\N

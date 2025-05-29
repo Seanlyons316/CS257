@@ -5,10 +5,9 @@
 
     A tiny Flask application that provides a website with an accompanying
     API (which is also tiny) to support that website.
-
-    Your website and API will be more complex.
 '''
 import sys
+from flask import render_template
 import flask
 import api as api
 ########### Initializing Flask ###########
@@ -24,6 +23,21 @@ app.register_blueprint(api.app, url_prefix='/api')
 def get_main_page():
     ''' This is the only route intended for human users '''
     return flask.render_template('index.html')
+@app.route('/homepage')
+def homepage():
+    return render_template('homepage.html')
+@app.route('/search')
+def search_list():
+    return render_template('search_list.html')
+
+@app.route('/tsunami/<int:wave_id>')
+def tsunami_info(wave_id):
+    return render_template('tsunami_info.html', wave_id=wave_id)
+
+@app.route('/map')
+def world_map():
+    return render_template('world_map.html')
+
 
 
 ########### Running the website server ###########
