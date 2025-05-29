@@ -49,19 +49,22 @@
       </table>
       <div class="sidenav">
         <a href="homepage.html" class="white bigger">TsunamiArchive</a>
-        <form onsubmit="event.preventDefault(); onTsunamisSearchFlexible();">
-          <input type="text" id="tsunami_search_input" placeholder="Enter year / country / ID…"/>
-          <button type="submit" id="tsunami_search_button">Search</button>
-          <button type="button" id="tsunami_reset_button">Reset</button>
-        </form>
-        <button id="tsunami_search_criteria_button" class="dropbtn">Search Criteria</button>
+        <p class="blue">Search by:</p>
+        <button id="tsunami_search_criteria_button" class="dropbtn">Criteria >> </button>
         <div id="tsunami_search_criteria_dropdown" class="dropdown-content">
           <a href="#" data-value="year">Year</a>
           <a href="#" data-value="country">Country</a>
           <a href="#" data-value="wave id">Wave ID</a>
         </div>
+
+        <p class="blue">Search box:</p>
+        <form onsubmit="event.preventDefault(); onTsunamisSearchFlexible();">
+          <input type="text" id="tsunami_search_input" placeholder="Enter year/country/ID"/>
+          <!-- <button type="submit" id="tsunami_search_button">Search</button> -->
+          <!-- <button type="button" id ="tsunami_reset_button">Reset</button> -->
+
         <p class="blue">Sort by:</p>
-        <button id="tsunami_sort_criteria_button" class="dropbtn">Sort Criteria</button>
+        <button id="tsunami_sort_criteria_button" class="dropbtn">Criteria >> </button>
         <div id="tsunami_sort_criteria_dropdown" class="dropdown-content">
           <a href="#" data-value="distance from source">Distance</a>
           <a href="#" data-value="travel time_hours">Travel Time</a>
@@ -75,14 +78,16 @@
           <a href="#" data-value="fatalities">Fatalities</a>
           <a href="#" data-value="houses damaged">Houses Damaged</a>
           <a href="#" data-value="houses destroyed">Houses Destroyed</a>
-
-
         </div>
-        <button id="tsunami_order_criteria_button" class="dropbtn">Order</button>
+        <p class="blue">Order by:</p>
+        <button id="tsunami_order_criteria_button" class="dropbtn">Criteria >></button>
         <div id="tsunami_order_criteria_dropdown" class="dropdown-content">
           <a href="#" data-value="asc">Ascending</a>
           <a href="#" data-value="desc">Descending</a>
         </div>
+        <button class="button" type="submit" id="tsunami_search_button">Search</button>
+        <button class="button" type="button" id="tsunami_reset_button">Reset</button>
+      </form>
       </div>
     </div>
   </body>
