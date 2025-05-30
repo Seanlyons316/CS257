@@ -24,4 +24,8 @@ Other suggestions for improvement
                                                                 and instead just display all of that information on the tsunami info page)
 - Have less words on the homepage
     (maybe make it into bullet points to make it easier to skim)
+-Implement search bars for each separate criteria (afterall only 3 things are needed)
+-More responsive search_list page (see what criteria you picked)
+-Synonyms for countries
+-Move asccending and descending to actual table itself as opposed to side option
 
