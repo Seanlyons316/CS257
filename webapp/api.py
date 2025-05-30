@@ -354,9 +354,8 @@ def get_tsunamis_by_year_range():
 
     except Exception as e:
         print(e, file=sys.stderr)
-    print(tsunamis)
     connection.close()
-    return json.dumps(tsunamis[:100], indent = 4)
+    return json.dumps(tsunamis, indent = 4)
 
 @app.route('/tsunamis/country_years', methods=['GET'])
 def get_tsunamis_by_country_and_year_range():

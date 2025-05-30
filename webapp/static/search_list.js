@@ -74,11 +74,41 @@ function onTsunamisSearchFlexible() {
       var dir = document.getElementById("tsunami_order_criteria").value === "desc" ? -1 : 1;
 
       tsunamis.sort(function(a, b) {
-        var va = parseFloat(a[field]);
-        var vb = parseFloat(b[field]);
-        if (va < vb) return -1 * dir;
-        if (va > vb) return 1 * dir;
+      let va = a[field];
+      let vb = b[field];
+      if (va === null && vb === null) {
         return 0;
+      }
+      if (va === null) {
+        return 1;
+      }
+      if (vb === null) {
+        return -1;
+      }
+
+      if (!isNaN(parseFloat(va)) && !isNaN(parseFloat(vb))){
+        va = parseFloat(va);
+        vb = parseFloat(vb);
+        if (va < vb){
+          return -1 * dir;
+        }
+        if (va > vb){
+          return 1 * dir;
+        }
+        return 0;
+      }
+
+      else {
+        va = String(va).toUpperCase();
+        vb = String(vb).toUpperCase();
+        if (va < vb){
+          return -1 * dir;
+        }
+        if (va > vb) {
+          return 1 * dir;
+        }
+        return 0;
+      }
       });
 
       let rows = "";
