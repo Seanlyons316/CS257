@@ -15,8 +15,8 @@
     <p class="description">
       Welcome to <strong>TsunamiArchive</strong> — a powerful tool for exploring historical tsunami data from around the world. 
       Whether you're a researcher, student, or just curious, you can search events by year, country, or specific identifiers. 
-      Use our interactive <a href="webapp/templates/world_map.html"><strong>map view</strong></a> to locate tsunamis geographically, 
-      or switch to the <a href="webapp/templates/search_list.html"><strong>list view</strong></a> for detailed filtering and sorting options. 
+      Use our interactive <a href="{{ url_for('world_map') }}"><strong>map view</strong></a> to locate tsunamis geographically, 
+      or switch to the <a href="{{ url_for('search_list') }}"><strong>list view</strong></a> for detailed filtering and sorting options. 
       Discover patterns, analyze impact data, and gain insights into some of the most powerful forces of nature.
     </p>
     <div class="sidenav">
