@@ -7,7 +7,7 @@
     API (which is also tiny) to support that website.
 '''
 import sys
-from flask import render_template
+from flask import render_template, request
 import flask
 import api as api
 ########### Initializing Flask ###########
@@ -30,10 +30,10 @@ def homepage():
 def search_list():
     return render_template('search_list.html')
 
-@app.route('/tsunami/<int:wave_id>')
-def tsunami_info(wave_id):
+@app.route('/tsunami')
+def tsunami_info():
+    wave_id = request.args.get('wave_id')
     return render_template('tsunami_info.html', wave_id=wave_id)
-
 @app.route('/map')
 def world_map():
     return render_template('world_map.html')

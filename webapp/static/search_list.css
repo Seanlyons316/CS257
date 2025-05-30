@@ -185,3 +185,55 @@ tr:hover {
     background-color: #2980b9;
     color: white;
   }
+
+/* Sidebar search styling */
+.search-controls {
+    padding: 20px 10px 10px 10px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.search-controls .input-group {
+    margin-bottom: 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+/* I had chathgpt cook up these parameters for the search controls, because I couldnt get it right.*/
+.search-controls input[type="number"],
+.search-controls input[type="text"],
+.search-controls select {
+    border-radius: 5px;
+    border: 1px solid #fff;
+    padding: 6px 8px;
+    font-size: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 3px;
+    background-color: #e5f3fa;
+    color: #023047;
+}
+
+.search-controls select {
+    background-color: #e5f3fa;
+    color: #023047;
+}
+
+.search-controls .button {
+    margin-right: 8px;
+    margin-left: 0;
+    font-size: 14px;
+    padding: 8px 18px;
+}
+
+.search-controls .blue {
+    color: #8ecae6;
+    font-size: 15px;
+}
+.sidenav .search-controls label,
+#tsunami_search_controls label {
+    font-size: 13px;
+    color:  #fff;
+    margin-bottom: 2px;
+    font-family: 'Courier New', Courier, monospace;
+}

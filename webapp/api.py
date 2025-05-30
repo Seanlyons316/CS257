@@ -287,9 +287,7 @@ def get_tsunamis_by_wave_id():
 def get_tsunamis_by_year_range():
     ''' Returns a list of all the tsuamis and all of their info between a start and end year. '''
     before = flask.request.args.get('start_year', type=float)
-    print(before)
     after = flask.request.args.get('end_year', type=float)
-    print(after)
     tsunamis = []
     parameters = []
     if before is not None:
@@ -366,23 +364,25 @@ def get_tsunamis_by_country_and_year_range():
     start_year = flask.request.args.get('start_year', type=float)
     end_year = flask.request.args.get('end_year', type=float)
     tsunamis = []
-    print(type(tsunamis))
+    country = str.upper(country)
+
     try:
-        query = '''SELECT ta.source_id, ta.WAVE_ID, ta.distance_from_source, ta.travel_time_hours,
-        ta.validity, ta.measurement_type, ta.wave_period, ta.first_motion,
-        ta.maximum_height, ta.horizonrtal_innundation,
-        td.injuries, td.injury_estimate, td.fatalities, td.fatality_estimate,
-        td.houses_damaged, td.house_damage_estimate,
-        td.houses_destroyed, td.house_destruction_estimate,
-        tp.region_code, tp.country, tp.wave_year, tp.wave_month, tp.wave_day,
-        tp.wave_state, tp.wave_location, tp.latitude, tp.longitude 
-        FROM tsunamis_attribute AS ta, tsunamis_destruction AS td, tsunamis_place_time AS tp
+        query = '''
+        SELECT ta.source_id, ta.WAVE_ID, ta.distance_from_source, ta.travel_time_hours,
+            ta.validity, ta.measurement_type, ta.wave_period, ta.first_motion,
+            ta.maximum_height, ta.horizonrtal_innundation,
+            td.injuries, td.injury_estimate, td.fatalities, td.fatality_estimate,
+            td.houses_damaged, td.house_damage_estimate,
+            td.houses_destroyed, td.house_destruction_estimate,
+            tp.region_code, tp.country, tp.wave_year, tp.wave_month, tp.wave_day,
+            tp.wave_state, tp.wave_location, tp.latitude, tp.longitude 
         FROM tsunamis_attribute AS ta
-        JOIN tsunamis_destruction AS td ON ta.source_id = td.WAVE_ID
-        JOIN tsunamis_place_time AS tp ON ta.source_id = tp.WAVE_ID
+        JOIN tsunamis_destruction AS td ON ta.WAVE_ID = td.WAVE_ID
+        JOIN tsunamis_place_time AS tp ON ta.WAVE_ID = tp.WAVE_ID
         WHERE CAST(tp.wave_YEAR AS FLOAT) BETWEEN %s AND %s
-        AND tp.country = %s
-        ORDER BY tp.wave_YEAR DESC'''
+        AND UPPER(tp.country) = %s
+        ORDER BY tp.wave_YEAR DESC;
+        '''
         connection = get_connection()
         cursor = connection.cursor()
         cursor.execute(query, (start_year, end_year, country))
@@ -420,6 +420,7 @@ def get_tsunamis_by_country_and_year_range():
         print(e, file=sys.stderr)
 
     connection.close()
+    print(tsunamis)
     return json.dumps(tsunamis, indent = 4)
 
 if __name__ == '__main__':
