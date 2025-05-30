@@ -1,0 +1,27 @@
+User Testing Observations
+30 May 2025
+Matvei Keshkekian and Sean Lyons
+
+
+Things the testers found easy
+- Able to navigate the website, going from the homepage to either list search or map search.
+- Being able to take information from the tsunami info page. On that page the user thought that the design was simple and clear.
+
+Things the user had trouble with
+- On the search list page, all the users had trouble understanding how to search by criteria
+- Users did not understand that "Criteria >>" is a dropdown and was confused by the different criteria buttons
+- User found the search box to be unintuitive (i.e tried to input a year range which is not implemented)
+
+
+Other positive comments or observations
+- Good colors and good consistency on the hovering logic
+- Once the user understood the search logic, the user was able to get good and intersting results
+
+
+Other suggestions for improvement
+- Get rid of excess information on the tsunami in seach list (i.e. get rid of source ID, tsunami ID, 
+                                                                and other info that is often null,
+                                                                and instead just display all of that information on the tsunami info page)
+- Have less words on the homepage
+    (maybe make it into bullet points to make it easier to skim)
+
