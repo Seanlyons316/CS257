@@ -60,7 +60,8 @@ function onTsunamisSearchFlexible() {
       "/tsunamis/country_years?country=" + encodeURIComponent(country) +
       "&start_year=" + encodeURIComponent(startYear) +
       "&end_year=" + encodeURIComponent(endYear);
-  } else {
+  } 
+  else {
     url = getAPIBaseURL() +
       "/tsunamis/years?start_year=" + encodeURIComponent(startYear) +
       "&end_year=" + encodeURIComponent(endYear);
