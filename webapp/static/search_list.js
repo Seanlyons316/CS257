@@ -47,6 +47,9 @@ function onTsunamisSearchFlexible() {
   const startYear = document.getElementById("tsunami_start_year").value.trim();
   const endYear = document.getElementById("tsunami_end_year").value.trim();
   const country = document.getElementById("tsunami_country").value.trim();
+  let currentPage = 1;
+  let totalPages = 1;
+  const pageSize = 25;
 
   let url = getAPIBaseURL() + "/tsunamis/?";
 
@@ -73,7 +76,10 @@ function onTsunamisSearchFlexible() {
 
   fetch(url)
     .then(response => response.json())
-    .then(tsunamis => {
+    .then(data => {
+      const tsunamis = data.tsunamis;
+      currentPage = data.page;
+      totalPages = Math.ceil(data.total_count / data.page_size);
       // Sorting (same as before)
       var field = document.getElementById("tsunami_sort_criteria").value;
       var dir = document.getElementById("tsunami_order_criteria").value === "desc" ? -1 : 1;
@@ -134,6 +140,8 @@ function onTsunamisSearchFlexible() {
           "</tr>";
       }
 
+      updatePages();
+
       const tbody = document.querySelector("#tsunamis_table tbody");
       if (tbody) {
         tbody.innerHTML = rows;
@@ -159,6 +167,27 @@ function onResetSearch() {
   document.getElementById("tsunami_sort_criteria").value = "distance from source";
   document.getElementById("tsunami_order_criteria").value = "asc";
 }
+
+function updatePages() {
+  document.getElementById("tsunami_current_page").textContent = currentPage;
+  document.getElementById("tsunami_total_pages").textContent = totalPages;
+  document.getElementById("previous_page").disabled = (currentPage <= 1);
+  document.getElementById("next_page").disabled = (currentPage >= totalPages);
+  document.getElementById("previous_page").onclick = function() {
+    if (currentPage > 1) {
+      currentPage--;
+      onTsunamisSearchFlexible();
+    }
+  };
+  document.getElementById("next_page").onclick = function() {
+    if (currentPage < totalPages) {
+      currentPage++;
+      onTsunamisSearchFlexible();
+    }
+  };
+}
+
+
 
 document.getElementById('tsunami_order_criteria_button').addEventListener('click', function(event) {
     event.stopPropagation();
