@@ -15,7 +15,7 @@ function getWaveIdFromQuery() {
 }
 
 function getTsunamiInfo(waveId) {
-    const url = getAPIBaseURL() + "tsunamis/id?id=" + encodeURIComponent(waveId);
+    const url = getAPIBaseURL() + "tsunami/id?id=" + encodeURIComponent(waveId);
     fetch(url)
         .then(function(r) {return r.json()})
         .then(function(tsunami) {

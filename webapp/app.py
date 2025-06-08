@@ -19,11 +19,7 @@ app.register_blueprint(api.app, url_prefix='/api')
 
 ########### The website routes ###########
 # (As you can see, there's not much of a website in this example.)
-@app.route('/') 
-def get_main_page():
-    ''' This is the only route intended for human users '''
-    return flask.render_template('index.html')
-@app.route('/homepage')
+@app.route('/')
 def homepage():
     return render_template('homepage.html')
 @app.route('/search')

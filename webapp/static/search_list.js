@@ -48,23 +48,27 @@ function onTsunamisSearchFlexible() {
   const endYear = document.getElementById("tsunami_end_year").value.trim();
   const country = document.getElementById("tsunami_country").value.trim();
 
-  // Require start and end year, but country is optional
-  if (!startYear || !endYear) {
-    alert("Please fill in BOTH Start Year and End Year.");
-    return;
-  }
+  let url = getAPIBaseURL() + "/tsunamis/?";
 
-  let url = "";
-  if (country) {
-    url = getAPIBaseURL() +
-      "/tsunamis/country_years?country=" + encodeURIComponent(country) +
-      "&start_year=" + encodeURIComponent(startYear) +
-      "&end_year=" + encodeURIComponent(endYear);
-  } 
-  else {
-    url = getAPIBaseURL() +
-      "/tsunamis/years?start_year=" + encodeURIComponent(startYear) +
-      "&end_year=" + encodeURIComponent(endYear);
+  if (startYear && endYear && country) {
+    url += 'start_year=' + encodeURIComponent(startYear) +
+           '&end_year=' + encodeURIComponent(endYear) +
+           '&country=' + encodeURIComponent(country);
+  } else if (startYear && endYear) {
+    url += 'start_year=' + encodeURIComponent(startYear) +
+           '&end_year=' + encodeURIComponent(endYear);
+  } else if (startYear && country) {
+    url += 'start_year=' + encodeURIComponent(startYear) +
+           '&country=' + encodeURIComponent(country);
+  } else if (endYear && country) {
+    url += 'end_year=' + encodeURIComponent(endYear) +
+           '&country=' + encodeURIComponent(country);
+  } else if (country) {
+    url += 'country=' + encodeURIComponent(country);
+  } else if (startYear) {
+    url += 'start_year=' + encodeURIComponent(startYear);
+  } else if (endYear) {
+    url += 'end_year=' + encodeURIComponent(endYear);
   }
 
   fetch(url)
@@ -111,7 +115,6 @@ function onTsunamisSearchFlexible() {
         return 0;
       }
       });
-
       let rows = "";
       for (const t of tsunamis) {
         rows +=
@@ -120,33 +123,14 @@ function onTsunamisSearchFlexible() {
           `<td>${t["wave year"]}</td>` +
           `<td>${t["latitude"]}</td>` +
           `<td>${t["longitude"]}</td>` +
-          // `<td>${t["source id"]}</td>` +
-          // `<td>${t["wave id"]}</td>` +
           `<td>${t["distance from source"]}</td>` +
           `<td>${t["travel time_hours"]}</td>` +
-          // `<td>${t["validity"]}</td>` +
-          // `<td>${t["measurement type"]}</td>` +
           `<td>${t["wave period"]}</td>` +
-          // `<td>${t["first motion"]}</td>` +
           `<td>${t["max_height"]}</td>` +
-          // `<td>${t["horizonrtal innundation"]}</td>` + 
           `<td>${t["injuries"]}</td>` +
-          // `<td>${t["injury estimate"]}</td>` +
           `<td>${t["fatalities"]}</td>` +
-          // `<td>${t["fatality estimate"]}</td>` +
           `<td>${t["houses damaged"]}</td>` +
-          // `<td>${t["houses damaged estimate"]}</td>` +
           `<td>${t["houses destroyed"]}</td>` +
-          // `<td>${t["houses destroyed estimate"]}</td>` +
-          // `<td>${t["region code"]}</td>` +
-          // `<td>${t["country"]}</td>` +
-          // `<td>${t["wave year"]}</td>` +
-          // `<td>${t["wave month"]}</td>` +
-          // `<td>${t["wave day"]}</td>` +
-          // `<td>${t["state"]}</td>` +
-          // `<td>${t["location"]}</td>` +
-          // `<td>${t["latitude"]}</td>` +
-          // `<td>${t["longitude"]}</td>` +
           "</tr>";
       }
 
