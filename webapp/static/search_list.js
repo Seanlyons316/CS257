@@ -115,33 +115,37 @@ function onTsunamisSearchFlexible() {
       for (const t of tsunamis) {
         rows +=
           `<tr class="tsunami-row" data-waveid="${t["wave id"]}">` +
-          `<td>${t["source id"]}</td>` +
-          `<td>${t["wave id"]}</td>` +
-          `<td>${t["distance from source"]}</td>` +
-          `<td>${t["travel time_hours"]}</td>` +
-          `<td>${t["validity"]}</td>` +
-          `<td>${t["measurement type"]}</td>` +
-          `<td>${t["wave period"]}</td>` +
-          `<td>${t["first motion"]}</td>` +
-          `<td>${t["max_height"]}</td>` +
-          `<td>${t["horizonrtal innundation"]}</td>` + 
-          `<td>${t["injuries"]}</td>` +
-          `<td>${t["injury estimate"]}</td>` +
-          `<td>${t["fatalities"]}</td>` +
-          `<td>${t["fatality estimate"]}</td>` +
-          `<td>${t["houses damaged"]}</td>` +
-          `<td>${t["houses damaged estimate"]}</td>` +
-          `<td>${t["houses destroyed"]}</td>` +
-          `<td>${t["houses destroyed estimate"]}</td>` +
-          `<td>${t["region code"]}</td>` +
           `<td>${t["country"]}</td>` +
           `<td>${t["wave year"]}</td>` +
-          `<td>${t["wave month"]}</td>` +
-          `<td>${t["wave day"]}</td>` +
-          `<td>${t["state"]}</td>` +
-          `<td>${t["location"]}</td>` +
           `<td>${t["latitude"]}</td>` +
           `<td>${t["longitude"]}</td>` +
+          // `<td>${t["source id"]}</td>` +
+          // `<td>${t["wave id"]}</td>` +
+          `<td>${t["distance from source"]}</td>` +
+          `<td>${t["travel time_hours"]}</td>` +
+          // `<td>${t["validity"]}</td>` +
+          // `<td>${t["measurement type"]}</td>` +
+          `<td>${t["wave period"]}</td>` +
+          // `<td>${t["first motion"]}</td>` +
+          `<td>${t["max_height"]}</td>` +
+          // `<td>${t["horizonrtal innundation"]}</td>` + 
+          `<td>${t["injuries"]}</td>` +
+          // `<td>${t["injury estimate"]}</td>` +
+          `<td>${t["fatalities"]}</td>` +
+          // `<td>${t["fatality estimate"]}</td>` +
+          `<td>${t["houses damaged"]}</td>` +
+          // `<td>${t["houses damaged estimate"]}</td>` +
+          `<td>${t["houses destroyed"]}</td>` +
+          // `<td>${t["houses destroyed estimate"]}</td>` +
+          // `<td>${t["region code"]}</td>` +
+          // `<td>${t["country"]}</td>` +
+          // `<td>${t["wave year"]}</td>` +
+          // `<td>${t["wave month"]}</td>` +
+          // `<td>${t["wave day"]}</td>` +
+          // `<td>${t["state"]}</td>` +
+          // `<td>${t["location"]}</td>` +
+          // `<td>${t["latitude"]}</td>` +
+          // `<td>${t["longitude"]}</td>` +
           "</tr>";
       }
 
