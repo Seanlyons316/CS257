@@ -1,18 +1,14 @@
-AUTHORS: Matvei Keshkekian
+AUTHORS: Matvei Keshkekian and Sean Lyons
 
-DATA: A tsunami dataset with detailed information on each one from 2000Bc to 2023
+DATA: Our data contains over 20 different parameters for individual tsunami waves that hit locations around the world over the last 4000 or so years.
+Examples of some the recorded parameters are year, month, day, houses destroyed, fatalities, and max height.
 
-Data set url: https://www.kaggle.com/datasets/noaa/seismic-waves
+The data can be found at this link: https://www.kaggle.com/datasets/noaa/seismic-waves/data and is in the public domain.
 
-[copyright info, plus a description of how I could get your raw
-data myself, including relevant links]
+STATUS: Our current website includes a search list method that allows the user to input a range (or single) year, country, and sort by a collection of other parameters.
+This returns a limited amount of data on all the tsunamis that satisfy those parameters sorted to user specifications. Twenty-five tsunamis will appear on a page with options at
+the bottom of the page to browse the pages. Additionally, a user can click on an individual row and see all of the available data for that tsunami. Originally, we wanted a world map
+but questioned how much this would help the user considering they can already type a country in and sort. The files for the work in progress of this world map are still in the folder
+but completely disconnected from the page so a user cannot access it.
 
-STATUS: Our list search works with every possible combination of search parameters.
-        We were not able to get the map search functional, so it has been removed from the HTML,
-        but parts of it remain commented out within the code and our repo, in case we decide to come back to it in the future.
-
-[a concise description of what works, what's not working
-yet, and any other information that might help me
-test and evaluate your work]
-
-NOTES: [(Optional) anything else you'd like to add]
+NOTES: THANK YOU!
