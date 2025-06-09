@@ -1,0 +1,29 @@
+Sean Lyons and Matvei Keshkekian
+
+All responses are in JSON
+
+A brief list of some of the endpoints we wish to implement.
+
+REQUEST: /tsunamis/
+GET PARAMETERS:
+    - country: Name of the country (case-insensitive).
+    - start_year: Starting year (float or integer).
+    - end_year: Ending year (float or integer).
+
+BEHAVIOR:
+    - If only `country` is specified: returns all tsunamis from that country.
+    - If only `start_year` or `end_year` is specified: returns all tsunamis in that year.
+    - If both `start_year` and `end_year` are specified: returns tsunamis between those years.
+    - If both `country` and `start_year`/`end_year` are specified: filters by both country and year range.
+    - If no parameters are provided: returns a message prompting for at least one parameter.
+
+RESPONSE:
+    A list of JSON objects, each representing a tsunami. Each object includes:
+    - source id, wave id
+    - distance from source, travel time (hours)
+    - validity, measurement type, wave period, first motion
+    - maximum height, horizontal inundation
+    - injuries, injury estimate, fatalities, fatality estimate
+    - houses damaged/destroyed and their estimates
+    - region code, country, year, month, day
+    - state, location, latitude, longitude
