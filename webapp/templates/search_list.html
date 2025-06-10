@@ -33,7 +33,14 @@
       </thead>
       <tbody></tbody>
     </table>
-
+    <div class="pagination">
+      <button id="previous_page" class="button">Previous</button>
+      <span>
+        Page <span id="tsunami_current_page">1</span>
+        of  <span id="tsunami_total_pages">1</span>
+      </span>
+      <button id="next_page" class="button">Next</button>
+    </div>
     <div class="sidenav">
       <a href="{{ url_for('homepage') }}" class="white bigger">TsunamiArchive</a>
         <p class="blue">Search box:</p>
@@ -50,36 +57,28 @@
             <label for="tsunami_country">Country:</label>
             <input type="text" id="tsunami_country" placeholder="e.g. Japan" />
           </div>
-          <input type="hidden" id="tsunami_sort_criteria" value="distance from source">
-          <input type="hidden" id="tsunami_order_criteria" value="asc">
+          <input type="hidden" id="tsunami_sort_criteria" value="wave year">
+          <input type="hidden" id="tsunami_order_criteria" value="desc">
 
           <p class="blue">Sort by:</p>
-          <button id="tsunami_sort_criteria_button" class="dropbtn">Advanced Search</button>
+          <button id="tsunami_sort_criteria_button" class="dropbtn">Year</button>
           <div id="tsunami_sort_criteria_dropdown" class="dropdown-content">
             <a href="#" data-value="distance from source">Distance</a>
             <a href="#" data-value="travel time_hours">Travel Time</a>
             <a href="#" data-value="validity">Validity</a>
-            <a href="#" data-value="measurement type">Measurement Type</a>
             <a href="#" data-value="wave period">Wave Period</a>
-            <a href="#" data-value="first motion">First Motion</a>
             <a href="#" data-value="max_height">Max Height</a>
             <a href="#" data-value="horizontal inundation">Horizontal Inundation</a>
             <a href="#" data-value="injuries">Injuries</a>
-            <a href="#" data-value="injury estimate">Injury Estimate</a>
             <a href="#" data-value="fatalities">Fatalities</a>
-            <a href="#" data-value="fatality estimate">Fatality Estimate</a>
             <a href="#" data-value="houses damaged">Houses Damaged</a>
-            <a href="#" data-value="houses damaged estimate">Houses Damaged Estimate</a>
             <a href="#" data-value="houses destroyed">Houses Destroyed</a>
-            <a href="#" data-value="houses destroyed estimate">Houses Destroyed Estimate</a>
-            <a href="#" data-value="region code">Region Code</a>
             <a href="#" data-value="wave year">Year</a>
             <a href="#" data-value="wave month">Month</a>
-            <a href="#" data-value="wave day">Day</a>
           </div>
 
           <p class="blue">Order by:</p>
-          <button id="tsunami_order_criteria_button" class="dropbtn">Criteria >></button>
+          <button id="tsunami_order_criteria_button" class="dropbtn">Descending</button>
           <div id="tsunami_order_criteria_dropdown" class="dropdown-content">
             <a href="#" data-value="asc">Ascending</a>
             <a href="#" data-value="desc">Descending</a>
